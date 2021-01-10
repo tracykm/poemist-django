@@ -1,6 +1,17 @@
 from graphene_django import DjangoObjectType
 import graphene
 from .models import Book, Poem
+from django.contrib.auth.models import User
+
+class UserType(DjangoObjectType):
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "email",
+            "first_name",
+            "poems",
+        )
 
 class BookType(DjangoObjectType):
     class Meta:
@@ -29,6 +40,7 @@ class PoemType(DjangoObjectType):
             "author",
             "color_range",
             "background_id",
+            "author"
         )
     text_chunks = graphene.List(TextChunkType)
 
