@@ -21,8 +21,9 @@ class Poem(models.Model):
     color_range = models.IntegerField(default=0)
     background_id = models.IntegerField(default=1)
     
-    def text_chunks(self):
-        selected_texts = self.selected_texts.order_by("start_idx").all()
+    def text_chunks(self, selected_texts):
+        if len(selected_texts) == 0:
+            return []
         result = [{"text": self.passage[0: selected_texts[0].start_idx], "is_selected": False}]
         for idx, s in enumerate(selected_texts):
             result.append({ "text": self.passage[s.start_idx: s.end_idx], "is_selected": True })
