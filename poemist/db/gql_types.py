@@ -2,7 +2,6 @@ from graphene_django import DjangoObjectType
 import graphene
 from .models import Book, Poem
 from django.contrib.auth.models import User
-
 class UserType(DjangoObjectType):
     class Meta:
         model = User
@@ -40,10 +39,14 @@ class PoemType(DjangoObjectType):
             "author",
             "color_range",
             "background_id",
-            "author"
         )
     text_chunks = graphene.List(TextChunkType)
 
 
     def resolve_text_chunks(parent, info):
         return parent.text_chunks()
+
+    author = graphene.Field(lambda: UserType)
+
+    def resolve_author(parent, info):
+        return info.context.user_loader.load(parent.author_id)

@@ -16,7 +16,7 @@ class Query(graphene.ObjectType):
 
     poems = graphene.List(PoemType)
     def resolve_poems(parent, info):
-        return Poem.objects.prefetch_related("selected_texts").all()
+        return Poem.objects.all()
 
     users = graphene.List(UserType)
     def resolve_users(parent, info):

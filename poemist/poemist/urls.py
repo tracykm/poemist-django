@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from .views import ping
 from graphene_django.views import GraphQLView
+from db.views import  CustomGraphQLView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ping/', ping, name="ping"),
-    path("graphql/", GraphQLView.as_view(graphiql=True)),
+    path("graphql/", CustomGraphQLView.as_view(graphiql=True)),
 ]
 
 from django.urls import path
