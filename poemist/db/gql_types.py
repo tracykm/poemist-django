@@ -27,6 +27,9 @@ class BookType(DjangoObjectType):
 class TextChunkType(graphene.ObjectType):
     text = graphene.String()
     is_selected = graphene.Boolean()
+class InputTextChunkType(graphene.InputObjectType):
+    text = graphene.String()
+    is_selected = graphene.Boolean()
 
 class PoemType(DjangoObjectType):
     class Meta:

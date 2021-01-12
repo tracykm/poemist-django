@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from typing import TypedDict
 class Book(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -9,7 +9,13 @@ class Book(models.Model):
     title = models.CharField(max_length=30)
     text = models.TextField()
 
+class TextChunkDict(TypedDict):
+    text: str
+    is_selected: bool
 
+class SelectedTextDict(TypedDict):
+    start_idx: str
+    end_idx: bool
 class Poem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -32,6 +38,25 @@ class Poem(models.Model):
             except:
                 pass # last will error and shouldn't be added
         return result
+
+    def get_selected_texts(self, text_chunks: list[TextChunkDict]) :
+        selected_texts: list[SelectedTextDict] = []
+        start_idx = 0
+        passage = ""
+        for text_chunk in text_chunks:
+            end_idx = start_idx + len(text_chunk["text"])
+            passage = passage + text_chunk["text"]
+            if text_chunk["is_selected"]:
+                selected_texts.append({"start_idx": start_idx, "end_idx": end_idx})
+            start_idx = end_idx
+        return [selected_texts, passage]
+
+    def save_text_chunks(self, text_chunks: list[TextChunkDict]):
+        [selected_texts, passage] = self.get_selected_texts(text_chunks)
+        self.passage = passage
+        self.save()
+        for selected_text in selected_texts:
+            SelectedText.objects.create(start_idx=selected_text["start_idx"], end_idx=selected_text["end_idx"], poem=self)
 
 class SelectedText(models.Model):
     poem = models.ForeignKey(Poem, on_delete=models.CASCADE, related_name='selected_texts')
