@@ -28,7 +28,7 @@ RUN adduser -D myuser
 USER myuser
 
 # collect static files
-RUN python manage.py collectstatic --noinput
+# RUN python manage.py collectstatic --noinput
 
 # run gunicorn
 CMD gunicorn poemist.wsgi:application --bind 0.0.0.0:$PORT
