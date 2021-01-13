@@ -1,22 +1,15 @@
 import React from "react";
 import "./App.css";
-import { useQuery, gql } from "@apollo/client";
-
-const GET_BOOK = gql`
-  query Book {
-    book {
-      id
-      title
-    }
-  }
-`;
+import { useQuery } from "@apollo/client";
+import getBook from "./queries/getBook";
+import { GetBook } from "./queries/types/GetBook";
 
 function App() {
-  const { loading, error, data } = useQuery(GET_BOOK);
+  const { data } = useQuery<GetBook>(getBook);
   return (
     <div className="App">
       <header className="App-header">
-        <p>{data?.book?.title}</p>
+        <p>{data?.poems?.[1].author.email}</p>
       </header>
     </div>
   );
