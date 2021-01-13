@@ -6,6 +6,7 @@ const getBook = gql`
       id
       author {
         email
+        id
       }
     }
   }
