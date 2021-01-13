@@ -15,7 +15,7 @@ class TextChunkDict(TypedDict):
 
 class SelectedTextDict(TypedDict):
     start_idx: str
-    end_idx: bool
+    end_idx: str
 class Poem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -45,7 +45,7 @@ class Poem(models.Model):
         passage = ""
         for text_chunk in text_chunks:
             end_idx = start_idx + len(text_chunk["text"])
-            passage = passage + text_chunk["text"]
+            passage += text_chunk["text"]
             if text_chunk["is_selected"]:
                 selected_texts.append({"start_idx": start_idx, "end_idx": end_idx})
             start_idx = end_idx
