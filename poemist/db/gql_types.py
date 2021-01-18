@@ -7,12 +7,17 @@ class UserType(DjangoObjectType):
         model = User
         fields = (
             "id",
+            "date_joined",
             "email",
             "username",
             "session_token"
             "first_name",
             "poems",
         )
+    poems_written_count = graphene.Int()
+
+    def resolve_poems_written_count(parent, info):
+        return parent.poems.count()
 
 class BookType(DjangoObjectType):
     class Meta:

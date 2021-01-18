@@ -27,6 +27,7 @@ export type Query = {
   hello?: Maybe<Scalars["String"]>
   randomBook?: Maybe<BookType>
   poem?: Maybe<PoemType>
+  user?: Maybe<UserType>
   poems?: Maybe<Array<Maybe<PoemType>>>
   users?: Maybe<Array<Maybe<UserType>>>
   current?: Maybe<UserType>
@@ -34,6 +35,14 @@ export type Query = {
 
 export type QueryPoemArgs = {
   id: Scalars["ID"]
+}
+
+export type QueryUserArgs = {
+  id: Scalars["ID"]
+}
+
+export type QueryPoemsArgs = {
+  authorId?: Maybe<Scalars["ID"]>
 }
 
 /** Debugging information for the current query. */
@@ -103,9 +112,10 @@ export type UserType = {
   id: Scalars["ID"]
   /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
   username: Scalars["String"]
-  firstName: Scalars["String"]
   email: Scalars["String"]
+  dateJoined: Scalars["DateTime"]
   poems: Array<PoemType>
+  poemsWrittenCount?: Maybe<Scalars["Int"]>
 }
 
 export type TextChunkType = {

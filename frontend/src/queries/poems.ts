@@ -42,3 +42,23 @@ export const getPoems = gql`
     }
   }
 `
+
+export const getPoemsByAuthor = gql`
+  query getPoemsByAuthor($authorId: ID) {
+    poems(authorId: $authorId) {
+      id
+      backgroundId
+      colorRange
+      textChunks {
+        text
+        isSelected
+      }
+      author {
+        id
+        username
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`

@@ -35,8 +35,14 @@ class Query(graphene.ObjectType):
     def resolve_poem(parent, info, id):
         return Poem.objects.get(id=id)
 
-    poems = graphene.List(PoemType)
-    def resolve_poems(parent, info):
+    user = graphene.Field(UserType, id=graphene.ID(required=True))
+    def resolve_user(parent, info, id):
+        return User.objects.get(id=id)
+
+    poems = graphene.List(PoemType, author_id=graphene.ID(required=False))
+    def resolve_poems(parent, info, author_id=None):
+        if (author_id):
+            return Poem.objects.filter(author_id=author_id)
         return Poem.objects.all()
 
     users = graphene.List(UserType)
