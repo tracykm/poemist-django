@@ -57,7 +57,7 @@ const WriterToolbar = ({
           <span className="text">{isBlank ? "nudge" : "clear"}</span>
         </button>
       )}
-      {/* <SavePoemButton poem={selectablePoem}>
+      <SavePoemButton poem={selectablePoem}>
         {({ onClick }) => (
           <button
             onClick={onClick}
@@ -67,7 +67,7 @@ const WriterToolbar = ({
             <span className="text">Next</span> <FaArrowRight />
           </button>
         )}
-      </SavePoemButton> */}
+      </SavePoemButton>
     </ToolbarDiv>
   )
 }

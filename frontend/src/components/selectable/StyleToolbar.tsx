@@ -106,7 +106,7 @@ class StyleToolbar extends React.PureComponent<
             <FaArrowLeft /> Back
           </span>
         </div>
-        {/* <SavePoemButton poem={poem} styleView>
+        <SavePoemButton poem={poem}>
           {({ onClick }) => (
             <button
               onClick={onClick}
@@ -118,7 +118,7 @@ class StyleToolbar extends React.PureComponent<
               </span>
             </button>
           )}
-        </SavePoemButton> */}
+        </SavePoemButton>
       </ToolbarDiv>
     )
   }

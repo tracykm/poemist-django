@@ -20,8 +20,31 @@ class CreatePoemMutation(graphene.Mutation):
         return CreatePoemMutation(poem=poem)
 
 
+class UpdatePoemMutation(graphene.Mutation):
+    class Arguments:
+        text_chunks = graphene.List(InputTextChunkType)
+        id = graphene.ID()
+        background_id = graphene.Int(required=False)
+        color_range = graphene.Int(required=False)
+
+    poem = graphene.Field(PoemType)
+
+    @classmethod
+    def mutate(cls, root, info, text_chunks, id, background_id=None, color_range=None):
+        poem = Poem.objects.get(id=id)
+        if background_id:
+            poem.background_id = background_id
+        if color_range:
+            poem.color_range = color_range
+        poem.selected_texts.all().delete()
+        poem.save_text_chunks(text_chunks)
+        poem.save()
+        return UpdatePoemMutation(poem=poem)
+
+
 class Mutation(graphene.ObjectType):
     create_poem = CreatePoemMutation.Field()
+    update_poem = UpdatePoemMutation.Field()
 
 class Query(graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name='_debug')

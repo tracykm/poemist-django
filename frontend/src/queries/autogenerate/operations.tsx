@@ -1,34 +1,5 @@
 import * as Types from "./schemas"
 
-export type GetBookQueryVariables = Types.Exact<{ [key: string]: never }>
-
-export type GetBookQuery = { __typename?: "Query" } & {
-  poems?: Types.Maybe<
-    Array<
-      Types.Maybe<
-        { __typename?: "PoemType" } & Pick<
-          Types.PoemType,
-          "id" | "createdAt" | "colorRange" | "backgroundId"
-        > & {
-            textChunks?: Types.Maybe<
-              Array<
-                Types.Maybe<
-                  { __typename?: "TextChunkType" } & Pick<
-                    Types.TextChunkType,
-                    "text" | "isSelected"
-                  >
-                >
-              >
-            >
-            author?: Types.Maybe<
-              { __typename?: "UserType" } & Pick<Types.UserType, "id" | "email">
-            >
-          }
-      >
-    >
-  >
-}
-
 export type GetSinglePoemQueryVariables = Types.Exact<{
   id: Types.Scalars["ID"]
 }>
@@ -131,6 +102,39 @@ export type GetPoemsByAuthorQuery = { __typename?: "Query" } & {
           }
       >
     >
+  >
+}
+
+export type UpdatePoemMutationVariables = Types.Exact<{
+  textChunks:
+    | Array<Types.Maybe<Types.InputTextChunkType>>
+    | Types.Maybe<Types.InputTextChunkType>
+  id: Types.Scalars["ID"]
+  backgroundId?: Types.Maybe<Types.Scalars["Int"]>
+  colorRange?: Types.Maybe<Types.Scalars["Int"]>
+}>
+
+export type UpdatePoemMutation = { __typename?: "Mutation" } & {
+  updatePoem?: Types.Maybe<
+    { __typename?: "UpdatePoemMutation" } & {
+      poem?: Types.Maybe<
+        { __typename?: "PoemType" } & Pick<
+          Types.PoemType,
+          "id" | "backgroundId" | "colorRange"
+        > & {
+            textChunks?: Types.Maybe<
+              Array<
+                Types.Maybe<
+                  { __typename?: "TextChunkType" } & Pick<
+                    Types.TextChunkType,
+                    "text" | "isSelected"
+                  >
+                >
+              >
+            >
+          }
+      >
+    }
   >
 }
 

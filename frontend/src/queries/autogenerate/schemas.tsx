@@ -128,10 +128,18 @@ export type TextChunkType = {
 export type Mutation = {
   __typename?: "Mutation"
   createPoem?: Maybe<CreatePoemMutation>
+  updatePoem?: Maybe<UpdatePoemMutation>
 }
 
 export type MutationCreatePoemArgs = {
   bookId?: Maybe<Scalars["String"]>
+  textChunks?: Maybe<Array<Maybe<InputTextChunkType>>>
+}
+
+export type MutationUpdatePoemArgs = {
+  backgroundId?: Maybe<Scalars["Int"]>
+  colorRange?: Maybe<Scalars["Int"]>
+  id?: Maybe<Scalars["ID"]>
   textChunks?: Maybe<Array<Maybe<InputTextChunkType>>>
 }
 
@@ -143,4 +151,9 @@ export type CreatePoemMutation = {
 export type InputTextChunkType = {
   text?: Maybe<Scalars["String"]>
   isSelected?: Maybe<Scalars["Boolean"]>
+}
+
+export type UpdatePoemMutation = {
+  __typename?: "UpdatePoemMutation"
+  poem?: Maybe<PoemType>
 }

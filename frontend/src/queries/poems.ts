@@ -98,26 +98,28 @@ export const getPoemsByAuthor = gql`
 //   }
 // `
 
-// export const updatePoem = gql`
-//   mutation updatePoem(
-//     $textChunks: [TextChunkInput]!
-//     $id: ID!
-//     $backgroundId: Int
-//     $colorRange: Int
-//   ) {
-//     updatePoem(
-//       textChunks: $textChunks
-//       id: $id
-//       backgroundId: $backgroundId
-//       colorRange: $colorRange
-//     ) {
-//       id
-//       backgroundId
-//       colorRange
-//       textChunks {
-//         text
-//         isSelected
-//       }
-//     }
-//   }
-// `
+export const updatePoem = gql`
+  mutation updatePoem(
+    $textChunks: [InputTextChunkType]!
+    $id: ID!
+    $backgroundId: Int
+    $colorRange: Int
+  ) {
+    updatePoem(
+      textChunks: $textChunks
+      id: $id
+      backgroundId: $backgroundId
+      colorRange: $colorRange
+    ) {
+      poem {
+        id
+        backgroundId
+        colorRange
+        textChunks {
+          text
+          isSelected
+        }
+      }
+    }
+  }
+`

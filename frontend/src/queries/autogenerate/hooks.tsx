@@ -3,68 +3,6 @@ import * as Types from "./operations"
 import { gql } from "@apollo/client"
 import * as Apollo from "@apollo/client"
 
-export const GetBookDocument = gql`
-  query GetBook {
-    poems {
-      id
-      createdAt
-      colorRange
-      backgroundId
-      textChunks {
-        text
-        isSelected
-      }
-      author {
-        id
-        email
-      }
-    }
-  }
-`
-
-/**
- * __useGetBookQuery__
- *
- * To run a query within a React component, call `useGetBookQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetBookQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetBookQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetBookQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    Types.GetBookQuery,
-    Types.GetBookQueryVariables
-  >,
-) {
-  return Apollo.useQuery<Types.GetBookQuery, Types.GetBookQueryVariables>(
-    GetBookDocument,
-    baseOptions,
-  )
-}
-export function useGetBookLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    Types.GetBookQuery,
-    Types.GetBookQueryVariables
-  >,
-) {
-  return Apollo.useLazyQuery<Types.GetBookQuery, Types.GetBookQueryVariables>(
-    GetBookDocument,
-    baseOptions,
-  )
-}
-export type GetBookQueryHookResult = ReturnType<typeof useGetBookQuery>
-export type GetBookLazyQueryHookResult = ReturnType<typeof useGetBookLazyQuery>
-export type GetBookQueryResult = Apollo.QueryResult<
-  Types.GetBookQuery,
-  Types.GetBookQueryVariables
->
 export const GetSinglePoemDocument = gql`
   query getSinglePoem($id: ID!) {
     poem(id: $id) {
@@ -280,6 +218,75 @@ export type GetPoemsByAuthorLazyQueryHookResult = ReturnType<
 export type GetPoemsByAuthorQueryResult = Apollo.QueryResult<
   Types.GetPoemsByAuthorQuery,
   Types.GetPoemsByAuthorQueryVariables
+>
+export const UpdatePoemDocument = gql`
+  mutation updatePoem(
+    $textChunks: [InputTextChunkType]!
+    $id: ID!
+    $backgroundId: Int
+    $colorRange: Int
+  ) {
+    updatePoem(
+      textChunks: $textChunks
+      id: $id
+      backgroundId: $backgroundId
+      colorRange: $colorRange
+    ) {
+      poem {
+        id
+        backgroundId
+        colorRange
+        textChunks {
+          text
+          isSelected
+        }
+      }
+    }
+  }
+`
+export type UpdatePoemMutationFn = Apollo.MutationFunction<
+  Types.UpdatePoemMutation,
+  Types.UpdatePoemMutationVariables
+>
+
+/**
+ * __useUpdatePoemMutation__
+ *
+ * To run a mutation, you first call `useUpdatePoemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePoemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePoemMutation, { data, loading, error }] = useUpdatePoemMutation({
+ *   variables: {
+ *      textChunks: // value for 'textChunks'
+ *      id: // value for 'id'
+ *      backgroundId: // value for 'backgroundId'
+ *      colorRange: // value for 'colorRange'
+ *   },
+ * });
+ */
+export function useUpdatePoemMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.UpdatePoemMutation,
+    Types.UpdatePoemMutationVariables
+  >,
+) {
+  return Apollo.useMutation<
+    Types.UpdatePoemMutation,
+    Types.UpdatePoemMutationVariables
+  >(UpdatePoemDocument, baseOptions)
+}
+export type UpdatePoemMutationHookResult = ReturnType<
+  typeof useUpdatePoemMutation
+>
+export type UpdatePoemMutationResult = Apollo.MutationResult<Types.UpdatePoemMutation>
+export type UpdatePoemMutationOptions = Apollo.BaseMutationOptions<
+  Types.UpdatePoemMutation,
+  Types.UpdatePoemMutationVariables
 >
 export const GetCurrentUserDocument = gql`
   query getCurrentUser {
