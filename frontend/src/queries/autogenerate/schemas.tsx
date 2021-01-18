@@ -101,6 +101,7 @@ export type PoemType = {
   createdAt: Scalars["DateTime"]
   updatedAt: Scalars["DateTime"]
   passage: Scalars["String"]
+  book: BookType
   author?: Maybe<UserType>
   colorRange: Scalars["Int"]
   backgroundId: Scalars["Int"]

@@ -49,6 +49,7 @@ class PoemType(DjangoObjectType):
             "author",
             "color_range",
             "background_id",
+            "book"
         )
     text_chunks = graphene.List(TextChunkType)
 

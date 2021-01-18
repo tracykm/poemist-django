@@ -79,6 +79,10 @@ export const GetSinglePoemDocument = gql`
         id
         username
       }
+      book {
+        id
+        title
+      }
       createdAt
       updatedAt
     }
@@ -150,6 +154,10 @@ export const GetPoemsDocument = gql`
         id
         username
       }
+      book {
+        id
+        title
+      }
       createdAt
       updatedAt
     }
@@ -214,6 +222,10 @@ export const GetPoemsByAuthorDocument = gql`
       author {
         id
         username
+      }
+      book {
+        id
+        title
       }
       createdAt
       updatedAt

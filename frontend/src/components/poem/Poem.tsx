@@ -3,13 +3,10 @@ import PoemHeader from "./PoemHeader"
 import PoemBody from "./PoemBody"
 import PoemFooter from "./PoemFooter"
 import PoemDiv from "src/components/poem/PoemDiv"
-import { GetSinglePoemQuery } from "src/queries/autogenerate/operations"
 import Loader from "../universal/Loader"
+import { IPoem } from "../types"
 
-export default function Poem(props: {
-  poem: GetSinglePoemQuery["poem"]
-  closeUp?: boolean
-}) {
+export default function Poem(props: { poem: IPoem; closeUp?: boolean }) {
   const { poem } = props
   if (!poem) {
     return (

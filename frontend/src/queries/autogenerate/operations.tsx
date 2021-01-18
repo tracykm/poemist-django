@@ -52,6 +52,7 @@ export type GetSinglePoemQuery = { __typename?: "Query" } & {
         author?: Types.Maybe<
           { __typename?: "UserType" } & Pick<Types.UserType, "id" | "username">
         >
+        book: { __typename?: "BookType" } & Pick<Types.BookType, "id" | "title">
       }
   >
   current?: Types.Maybe<
@@ -84,6 +85,10 @@ export type GetPoemsQuery = { __typename?: "Query" } & {
                 Types.UserType,
                 "id" | "username"
               >
+            >
+            book: { __typename?: "BookType" } & Pick<
+              Types.BookType,
+              "id" | "title"
             >
           }
       >
@@ -118,6 +123,10 @@ export type GetPoemsByAuthorQuery = { __typename?: "Query" } & {
                 Types.UserType,
                 "id" | "username"
               >
+            >
+            book: { __typename?: "BookType" } & Pick<
+              Types.BookType,
+              "id" | "title"
             >
           }
       >

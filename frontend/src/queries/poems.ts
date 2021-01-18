@@ -14,6 +14,10 @@ export const getSinglePoem = gql`
         id
         username
       }
+      book {
+        id
+        title
+      }
       createdAt
       updatedAt
     }
@@ -37,6 +41,10 @@ export const getPoems = gql`
         id
         username
       }
+      book {
+        id
+        title
+      }
       createdAt
       updatedAt
     }
@@ -57,8 +65,59 @@ export const getPoemsByAuthor = gql`
         id
         username
       }
+      book {
+        id
+        title
+      }
       createdAt
       updatedAt
     }
   }
 `
+
+// export const createPoem = gql`
+//   mutation createPoem(
+//     $passage: String!
+//     $textChunks: [TextChunkInput]!
+//     $backgroundId: Int!
+//     $colorRange: Int!
+//   ) {
+//     createPoem(
+//       backgroundId: $backgroundId
+//       colorRange: $colorRange
+//       bookId: 1
+//       passage: $passage
+//       textChunks: $textChunks
+//     ) {
+//       id
+//       textChunks {
+//         text
+//         isSelected
+//       }
+//     }
+//   }
+// `
+
+// export const updatePoem = gql`
+//   mutation updatePoem(
+//     $textChunks: [TextChunkInput]!
+//     $id: ID!
+//     $backgroundId: Int
+//     $colorRange: Int
+//   ) {
+//     updatePoem(
+//       textChunks: $textChunks
+//       id: $id
+//       backgroundId: $backgroundId
+//       colorRange: $colorRange
+//     ) {
+//       id
+//       backgroundId
+//       colorRange
+//       textChunks {
+//         text
+//         isSelected
+//       }
+//     }
+//   }
+// `
