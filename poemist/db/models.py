@@ -5,8 +5,8 @@ class Book(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    author = models.CharField(max_length=30)
-    title = models.CharField(max_length=30)
+    author = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
     text = models.TextField()
 
 class TextChunkDict(TypedDict):
