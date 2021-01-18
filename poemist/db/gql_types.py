@@ -8,6 +8,8 @@ class UserType(DjangoObjectType):
         fields = (
             "id",
             "email",
+            "username",
+            "session_token"
             "first_name",
             "poems",
         )

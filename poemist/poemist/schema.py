@@ -27,9 +27,13 @@ class Query(graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name='_debug')
     hello = graphene.String(default_value="Hi!")
 
-    book = graphene.Field(BookType)
-    def resolve_book(parent, info):
-        return Book.objects.first()
+    random_book = graphene.Field(BookType)
+    def resolve_random_book(parent, info):
+        return Book.objects.order_by("?").first()
+
+    poem = graphene.Field(PoemType, id=graphene.ID(required=True))
+    def resolve_poem(parent, info, id):
+        return Poem.objects.get(id=id)
 
     poems = graphene.List(PoemType)
     def resolve_poems(parent, info):
@@ -38,5 +42,9 @@ class Query(graphene.ObjectType):
     users = graphene.List(UserType)
     def resolve_users(parent, info):
         return User.objects.all()
+
+    current = graphene.Field(UserType)
+    def resolve_current(parent, info):
+        return User.objects.first()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

@@ -3,19 +3,25 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client";
 
+const DEV_API = "http://localhost:8000/graphql";
+const STAGING_API = "https://calm-lowlands-48993.herokuapp.com/graphql";
+
 const client = new ApolloClient({
-  uri: "http://localhost:8000/graphql",
+  uri: DEV_API,
   cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
