@@ -1,5 +1,13 @@
 import * as Types from "./schemas"
 
+export type GetRandomBookQueryVariables = Types.Exact<{ [key: string]: never }>
+
+export type GetRandomBookQuery = { __typename?: "Query" } & {
+  randomBook?: Types.Maybe<
+    { __typename?: "BookType" } & Pick<Types.BookType, "id" | "title" | "text">
+  >
+}
+
 export type GetSinglePoemQueryVariables = Types.Exact<{
   id: Types.Scalars["ID"]
 }>
@@ -105,6 +113,23 @@ export type GetPoemsByAuthorQuery = { __typename?: "Query" } & {
   >
 }
 
+export type CreatePoemMutationVariables = Types.Exact<{
+  textChunks:
+    | Array<Types.Maybe<Types.InputTextChunkType>>
+    | Types.Maybe<Types.InputTextChunkType>
+  bookId: Types.Scalars["ID"]
+}>
+
+export type CreatePoemMutation = { __typename?: "Mutation" } & {
+  createPoem?: Types.Maybe<
+    { __typename?: "CreatePoemMutation" } & {
+      poem?: Types.Maybe<
+        { __typename?: "PoemType" } & Pick<Types.PoemType, "id">
+      >
+    }
+  >
+}
+
 export type UpdatePoemMutationVariables = Types.Exact<{
   textChunks:
     | Array<Types.Maybe<Types.InputTextChunkType>>
@@ -118,21 +143,7 @@ export type UpdatePoemMutation = { __typename?: "Mutation" } & {
   updatePoem?: Types.Maybe<
     { __typename?: "UpdatePoemMutation" } & {
       poem?: Types.Maybe<
-        { __typename?: "PoemType" } & Pick<
-          Types.PoemType,
-          "id" | "backgroundId" | "colorRange"
-        > & {
-            textChunks?: Types.Maybe<
-              Array<
-                Types.Maybe<
-                  { __typename?: "TextChunkType" } & Pick<
-                    Types.TextChunkType,
-                    "text" | "isSelected"
-                  >
-                >
-              >
-            >
-          }
+        { __typename?: "PoemType" } & Pick<Types.PoemType, "id">
       >
     }
   >

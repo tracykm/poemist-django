@@ -132,7 +132,7 @@ export type Mutation = {
 }
 
 export type MutationCreatePoemArgs = {
-  bookId?: Maybe<Scalars["String"]>
+  bookId?: Maybe<Scalars["ID"]>
   textChunks?: Maybe<Array<Maybe<InputTextChunkType>>>
 }
 

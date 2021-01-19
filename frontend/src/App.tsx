@@ -15,7 +15,6 @@ function App() {
         <Route path="/" exact component={HomeView} />
         <Route path="/about" component={About} />
         <Route path="/edit/stylize/:id" component={StyleView} />
-        <Route path="/new/stylize" component={StyleView} />
         <Route path="/new/write" component={WriteView} />
         <Route path="/edit/write/:id" component={WriteView} />
         <Route path="/poem/:id" component={CloseUpPoemView} />

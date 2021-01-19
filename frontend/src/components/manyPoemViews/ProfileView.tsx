@@ -37,7 +37,7 @@ function UserPoems({ authorId }) {
 }
 
 export default function ProfileView() {
-  const { id } = useParams()
+  const { id } = useParams<{ id: string }>()
   return (
     <div className="index-view">
       <ProfileHeader id={id} />

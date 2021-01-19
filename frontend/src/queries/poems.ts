@@ -75,28 +75,15 @@ export const getPoemsByAuthor = gql`
   }
 `
 
-// export const createPoem = gql`
-//   mutation createPoem(
-//     $passage: String!
-//     $textChunks: [TextChunkInput]!
-//     $backgroundId: Int!
-//     $colorRange: Int!
-//   ) {
-//     createPoem(
-//       backgroundId: $backgroundId
-//       colorRange: $colorRange
-//       bookId: 1
-//       passage: $passage
-//       textChunks: $textChunks
-//     ) {
-//       id
-//       textChunks {
-//         text
-//         isSelected
-//       }
-//     }
-//   }
-// `
+export const createPoem = gql`
+  mutation createPoem($textChunks: [InputTextChunkType]!, $bookId: ID!) {
+    createPoem(textChunks: $textChunks, bookId: $bookId) {
+      poem {
+        id
+      }
+    }
+  }
+`
 
 export const updatePoem = gql`
   mutation updatePoem(
@@ -113,12 +100,6 @@ export const updatePoem = gql`
     ) {
       poem {
         id
-        backgroundId
-        colorRange
-        textChunks {
-          text
-          isSelected
-        }
       }
     }
   }

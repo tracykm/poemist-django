@@ -3,6 +3,63 @@ import * as Types from "./operations"
 import { gql } from "@apollo/client"
 import * as Apollo from "@apollo/client"
 
+export const GetRandomBookDocument = gql`
+  query getRandomBook {
+    randomBook {
+      id
+      title
+      text
+    }
+  }
+`
+
+/**
+ * __useGetRandomBookQuery__
+ *
+ * To run a query within a React component, call `useGetRandomBookQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRandomBookQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRandomBookQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetRandomBookQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    Types.GetRandomBookQuery,
+    Types.GetRandomBookQueryVariables
+  >,
+) {
+  return Apollo.useQuery<
+    Types.GetRandomBookQuery,
+    Types.GetRandomBookQueryVariables
+  >(GetRandomBookDocument, baseOptions)
+}
+export function useGetRandomBookLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Types.GetRandomBookQuery,
+    Types.GetRandomBookQueryVariables
+  >,
+) {
+  return Apollo.useLazyQuery<
+    Types.GetRandomBookQuery,
+    Types.GetRandomBookQueryVariables
+  >(GetRandomBookDocument, baseOptions)
+}
+export type GetRandomBookQueryHookResult = ReturnType<
+  typeof useGetRandomBookQuery
+>
+export type GetRandomBookLazyQueryHookResult = ReturnType<
+  typeof useGetRandomBookLazyQuery
+>
+export type GetRandomBookQueryResult = Apollo.QueryResult<
+  Types.GetRandomBookQuery,
+  Types.GetRandomBookQueryVariables
+>
 export const GetSinglePoemDocument = gql`
   query getSinglePoem($id: ID!) {
     poem(id: $id) {
@@ -219,6 +276,57 @@ export type GetPoemsByAuthorQueryResult = Apollo.QueryResult<
   Types.GetPoemsByAuthorQuery,
   Types.GetPoemsByAuthorQueryVariables
 >
+export const CreatePoemDocument = gql`
+  mutation createPoem($textChunks: [InputTextChunkType]!, $bookId: ID!) {
+    createPoem(textChunks: $textChunks, bookId: $bookId) {
+      poem {
+        id
+      }
+    }
+  }
+`
+export type CreatePoemMutationFn = Apollo.MutationFunction<
+  Types.CreatePoemMutation,
+  Types.CreatePoemMutationVariables
+>
+
+/**
+ * __useCreatePoemMutation__
+ *
+ * To run a mutation, you first call `useCreatePoemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePoemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPoemMutation, { data, loading, error }] = useCreatePoemMutation({
+ *   variables: {
+ *      textChunks: // value for 'textChunks'
+ *      bookId: // value for 'bookId'
+ *   },
+ * });
+ */
+export function useCreatePoemMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.CreatePoemMutation,
+    Types.CreatePoemMutationVariables
+  >,
+) {
+  return Apollo.useMutation<
+    Types.CreatePoemMutation,
+    Types.CreatePoemMutationVariables
+  >(CreatePoemDocument, baseOptions)
+}
+export type CreatePoemMutationHookResult = ReturnType<
+  typeof useCreatePoemMutation
+>
+export type CreatePoemMutationResult = Apollo.MutationResult<Types.CreatePoemMutation>
+export type CreatePoemMutationOptions = Apollo.BaseMutationOptions<
+  Types.CreatePoemMutation,
+  Types.CreatePoemMutationVariables
+>
 export const UpdatePoemDocument = gql`
   mutation updatePoem(
     $textChunks: [InputTextChunkType]!
@@ -234,12 +342,6 @@ export const UpdatePoemDocument = gql`
     ) {
       poem {
         id
-        backgroundId
-        colorRange
-        textChunks {
-          text
-          isSelected
-        }
       }
     }
   }

@@ -6,7 +6,7 @@ import { useGetSinglePoemQuery } from "../../queries/autogenerate/hooks"
 import { useParams } from "react-router-dom"
 
 export default function CloseUpPoemView() {
-  let { id } = useParams()
+  const { id } = useParams<{ id: string }>()
   const { data, loading } = useGetSinglePoemQuery({
     variables: {
       id,

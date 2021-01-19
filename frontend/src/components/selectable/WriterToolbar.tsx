@@ -2,6 +2,7 @@ import React from "react"
 import { FaArrowRight } from "react-icons/fa"
 import SavePoemButton from "./SavePoemButton"
 import ToolbarDiv from "./ToolbarDiv"
+import { useHistory } from "react-router-dom"
 import { ISelectablePoem, IWordLetter } from "../types"
 
 interface IProps {
@@ -24,6 +25,8 @@ const WriterToolbar = ({
   selectablePoem,
   ...props
 }: IProps) => {
+  debugger
+  const history = useHistory()
   // @ts-ignore
   const isBlank = getIsBlank(selectablePoem.wordLetters)
   return (
@@ -58,9 +61,14 @@ const WriterToolbar = ({
         </button>
       )}
       <SavePoemButton poem={selectablePoem}>
-        {({ onClick }) => (
+        {({ savePoem }) => (
           <button
-            onClick={onClick}
+            onClick={() =>
+              savePoem().then((res) => {
+                const id = (res.data.updatePoem || res.data.createPoem).poem.id
+                history.push(`/edit/stylize/${id}`)
+              })
+            }
             className="toolbar-tab toolbar-tab-lg"
             data-test="styleLink"
           >

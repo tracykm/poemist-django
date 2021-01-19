@@ -107,9 +107,13 @@ class StyleToolbar extends React.PureComponent<
           </span>
         </div>
         <SavePoemButton poem={poem}>
-          {({ onClick }) => (
+          {({ savePoem }) => (
             <button
-              onClick={onClick}
+              onClick={() => {
+                savePoem().then(() => {
+                  this.props.history.push("/")
+                })
+              }}
               className="toolbar-tab toolbar-tab-lg lower"
               data-test="saveLink"
             >

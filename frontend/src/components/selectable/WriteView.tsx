@@ -8,7 +8,10 @@ import SelectablePoemRender from "./SelectablePoem"
 import { random } from "lodash"
 import Loader from "src/components/universal/Loader"
 import { useParams } from "react-router-dom"
-import { useGetSinglePoemQuery } from "src/queries/autogenerate/hooks"
+import {
+  useGetSinglePoemQuery,
+  useGetRandomBookQuery,
+} from "src/queries/autogenerate/hooks"
 
 function getSelectable(poem: {
   textChunks: IPoem["textChunks"]
@@ -101,14 +104,24 @@ class WriteView extends React.PureComponent<IProps> {
 }
 
 export default function WriteViewWData() {
-  const { id } = useParams()
+  const { id } = useParams<{ id: string }>()
   const { data } = useGetSinglePoemQuery({ variables: { id } })
-  if (!data) return <Loader />
+  const randomBook = useGetRandomBookQuery()
+  if (!randomBook.data) return <Loader />
   const selectablePoem = {
-    author: { id: data.current && data.current.id, username: "" },
-    ...getSelectable({ textChunks: data.poem.textChunks }),
-    ...data.poem,
+    book: {
+      id: randomBook.data.randomBook.id,
+      title: randomBook.data.randomBook.title,
+    },
+    author: { id: data?.current.id || "1", username: "" },
+    ...getSelectable({
+      textChunks: data?.poem.textChunks || [
+        { text: randomBook.data.randomBook.text, isSelected: false },
+      ],
+    }),
+    ...(data?.poem || {}),
   }
-  const getNewPassage = () => null
+  debugger
+  const getNewPassage = randomBook.refetch
   return <WriteView {...{ selectablePoem, getNewPassage }} />
 }

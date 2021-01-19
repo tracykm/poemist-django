@@ -1,11 +1,12 @@
 import React from "react"
 import IndexView from "src/components/manyPoemViews/IndexView"
 import { useGetPoemsQuery } from "src/queries/autogenerate/hooks"
+import Loader from "../universal/Loader"
 
 export default function HomeView() {
   const { data, loading } = useGetPoemsQuery()
   if (loading) {
-    return "loading"
+    return <Loader />
   }
   return (
     <div className="index-view">

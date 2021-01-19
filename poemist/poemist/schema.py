@@ -8,7 +8,7 @@ from graphene_django.debug import DjangoDebug
 class CreatePoemMutation(graphene.Mutation):
     class Arguments:
         text_chunks = graphene.List(InputTextChunkType)
-        book_id = graphene.String()
+        book_id = graphene.ID()
 
     # The class attributes define the response of the mutation
     poem = graphene.Field(PoemType)
