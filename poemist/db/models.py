@@ -36,7 +36,9 @@ class Poem(models.Model):
             try:
                 result.append({ "text": self.passage[s.end_idx: selected_texts[idx + 1].start_idx], "is_selected": False })
             except:
+                result.append({ "text": self.passage[s.end_idx: len(self.passage)], "is_selected": False })
                 pass # last will error and shouldn't be added
+
         return result
 
     def get_selected_texts(self, text_chunks: list[TextChunkDict]) :

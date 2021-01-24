@@ -25,7 +25,6 @@ const WriterToolbar = ({
   selectablePoem,
   ...props
 }: IProps) => {
-  debugger
   const history = useHistory()
   // @ts-ignore
   const isBlank = getIsBlank(selectablePoem.wordLetters)

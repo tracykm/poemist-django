@@ -105,7 +105,7 @@ class WriteView extends React.PureComponent<IProps> {
 
 export default function WriteViewWData() {
   const { id } = useParams<{ id: string }>()
-  const { data } = useGetSinglePoemQuery({ variables: { id } })
+  const { data } = useGetSinglePoemQuery({ variables: { id }, skip: !id })
   const randomBook = useGetRandomBookQuery()
   if (!randomBook.data) return <Loader />
   const selectablePoem = {
@@ -121,7 +121,6 @@ export default function WriteViewWData() {
     }),
     ...(data?.poem || {}),
   }
-  debugger
   const getNewPassage = randomBook.refetch
   return <WriteView {...{ selectablePoem, getNewPassage }} />
 }

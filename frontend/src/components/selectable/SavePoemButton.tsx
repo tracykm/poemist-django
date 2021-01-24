@@ -4,6 +4,7 @@ import {
   useCreatePoemMutation,
 } from "src/queries/autogenerate/hooks"
 import getSelectedTexts from "src/utils/getSelectedTexts"
+import { GetSinglePoemDocument } from "src/queries/autogenerate/hooks"
 
 export default function SavePoemButton({ poem, children }) {
   let { id, textChunks, backgroundId, colorRange, book } = poem
@@ -20,6 +21,7 @@ export default function SavePoemButton({ poem, children }) {
       backgroundId,
       colorRange,
     },
+    refetchQueries: [{ query: GetSinglePoemDocument, variables: { id } }],
   })
   const [createPoemMutation] = useCreatePoemMutation({
     variables: {
