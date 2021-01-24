@@ -1,19 +1,19 @@
 import styled from "styled-components"
 import { sizes, color } from "src/components/universal/_variables"
-const paperTextureImg = require("src/images/paper-rect-contrast.jpg")
-const treeBarkImg = require("src/images/tree-bark.jpg")
-const circlePatternImg = require("src/images/contemporary_china_small.png")
-const oldPaperImg = require("src/images/4345189-xs.jpg")
-const f0c4457 = require("src/images/f0c4457.jpg")
-const maxresdefault = require("src/images/maxresdefault.jpg")
-const blueTile = require("src/images/blueTile.jpg")
-const tile = require("src/images/life_original_wild_urban_shells_abstract_texture_love-572258.jpg")
-const paintingCracks = require("src/images/painting-cracks.jpg")
-const Alcala_lg = require("src/images/Alcala_lg.jpg")
-const map = require("src/images/map2.jpg")
-const blue = require("src/images/blue.jpg")
-const triangles123 = require("src/images/triangles-123.jpg")
-const mU0yXR99Bg91S1ACSyPq_w = require("src/images/1_mU0yXR99Bg91S1ACSyPq_w.jpg")
+import paperTextureImg from "src/images/paper-rect-contrast.jpg"
+import treeBarkImg from "src/images/tree-bark.jpg"
+import circlePatternImg from "src/images/contemporary_china_small.png"
+import oldPaperImg from "src/images/4345189-xs.jpg"
+import f0c4457 from "src/images/f0c4457.jpg"
+import maxresdefault from "src/images/maxresdefault.jpg"
+import blueTile from "src/images/blueTile.jpg"
+import tile from "src/images/life_original_wild_urban_shells_abstract_texture_love-572258.jpg"
+import paintingCracks from "src/images/painting-cracks.jpg"
+import Alcala_lg from "src/images/Alcala_lg.jpg"
+import map from "src/images/map2.jpg"
+import blue from "src/images/blue.jpg"
+import triangles123 from "src/images/triangles-123.jpg"
+import mU0yXR99Bg91S1ACSyPq_w from "src/images/1_mU0yXR99Bg91S1ACSyPq_w.jpg"
 
 // @for $i from 1 through 36 {
 //   .color-#{$i} {

@@ -14,9 +14,9 @@ export const LoadingPoemDiv = styled.div`
 export const PoemContainerDiv = styled.div`
   margin: auto;
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 10px;
   > div {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-gap: 10px;
     text-align: center;
     margin-left: -2rem;
     margin-right: -2rem;

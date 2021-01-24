@@ -85,6 +85,7 @@ class WriteView extends React.PureComponent<IProps> {
       >
         <h1>{this.props.selectablePoem.id ? "Edit" : "Write"}</h1>
         <h5>Make your own poem by clicking on words!</h5>
+
         <WriterToolbar
           selectablePoem={this.state}
           getNewPassage={this.props.getNewPassage}
