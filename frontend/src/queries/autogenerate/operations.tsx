@@ -149,6 +149,16 @@ export type UpdatePoemMutation = { __typename?: "Mutation" } & {
   >
 }
 
+export type DeletePoemMutationVariables = Types.Exact<{
+  id: Types.Scalars["ID"]
+}>
+
+export type DeletePoemMutation = { __typename?: "Mutation" } & {
+  deletePoem?: Types.Maybe<
+    { __typename?: "DeletePoemMutation" } & Pick<Types.DeletePoemMutation, "id">
+  >
+}
+
 export type GetCurrentUserQueryVariables = Types.Exact<{ [key: string]: never }>
 
 export type GetCurrentUserQuery = { __typename?: "Query" } & {

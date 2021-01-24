@@ -390,6 +390,54 @@ export type UpdatePoemMutationOptions = Apollo.BaseMutationOptions<
   Types.UpdatePoemMutation,
   Types.UpdatePoemMutationVariables
 >
+export const DeletePoemDocument = gql`
+  mutation deletePoem($id: ID!) {
+    deletePoem(id: $id) {
+      id
+    }
+  }
+`
+export type DeletePoemMutationFn = Apollo.MutationFunction<
+  Types.DeletePoemMutation,
+  Types.DeletePoemMutationVariables
+>
+
+/**
+ * __useDeletePoemMutation__
+ *
+ * To run a mutation, you first call `useDeletePoemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeletePoemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deletePoemMutation, { data, loading, error }] = useDeletePoemMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeletePoemMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.DeletePoemMutation,
+    Types.DeletePoemMutationVariables
+  >,
+) {
+  return Apollo.useMutation<
+    Types.DeletePoemMutation,
+    Types.DeletePoemMutationVariables
+  >(DeletePoemDocument, baseOptions)
+}
+export type DeletePoemMutationHookResult = ReturnType<
+  typeof useDeletePoemMutation
+>
+export type DeletePoemMutationResult = Apollo.MutationResult<Types.DeletePoemMutation>
+export type DeletePoemMutationOptions = Apollo.BaseMutationOptions<
+  Types.DeletePoemMutation,
+  Types.DeletePoemMutationVariables
+>
 export const GetCurrentUserDocument = gql`
   query getCurrentUser {
     current {

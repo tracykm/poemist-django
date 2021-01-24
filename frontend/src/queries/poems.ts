@@ -104,3 +104,11 @@ export const updatePoem = gql`
     }
   }
 `
+
+export const deletePoem = gql`
+  mutation deletePoem($id: ID!) {
+    deletePoem(id: $id) {
+      id
+    }
+  }
+`

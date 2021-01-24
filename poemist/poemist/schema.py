@@ -41,10 +41,24 @@ class UpdatePoemMutation(graphene.Mutation):
         poem.save()
         return UpdatePoemMutation(poem=poem)
 
+class DeletePoemMutation(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID()
+
+    id = graphene.String()
+
+    @classmethod
+    def mutate(cls, root, info, id):
+        poem = Poem.objects.get(id=id)
+        poem.delete()
+        # breakpoint()
+        return DeletePoemMutation(id=id)
+
 
 class Mutation(graphene.ObjectType):
     create_poem = CreatePoemMutation.Field()
     update_poem = UpdatePoemMutation.Field()
+    delete_poem = DeletePoemMutation.Field()
 
 class Query(graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name='_debug')

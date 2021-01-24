@@ -129,6 +129,7 @@ export type Mutation = {
   __typename?: "Mutation"
   createPoem?: Maybe<CreatePoemMutation>
   updatePoem?: Maybe<UpdatePoemMutation>
+  deletePoem?: Maybe<DeletePoemMutation>
 }
 
 export type MutationCreatePoemArgs = {
@@ -141,6 +142,10 @@ export type MutationUpdatePoemArgs = {
   colorRange?: Maybe<Scalars["Int"]>
   id?: Maybe<Scalars["ID"]>
   textChunks?: Maybe<Array<Maybe<InputTextChunkType>>>
+}
+
+export type MutationDeletePoemArgs = {
+  id?: Maybe<Scalars["ID"]>
 }
 
 export type CreatePoemMutation = {
@@ -156,4 +161,9 @@ export type InputTextChunkType = {
 export type UpdatePoemMutation = {
   __typename?: "UpdatePoemMutation"
   poem?: Maybe<PoemType>
+}
+
+export type DeletePoemMutation = {
+  __typename?: "DeletePoemMutation"
+  id?: Maybe<Scalars["String"]>
 }
