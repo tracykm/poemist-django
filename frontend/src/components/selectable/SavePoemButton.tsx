@@ -21,7 +21,6 @@ export default function SavePoemButton({ poem, children }) {
       backgroundId,
       colorRange,
     },
-    refetchQueries: [{ query: GetSinglePoemDocument, variables: { id } }],
   })
   const [createPoemMutation] = useCreatePoemMutation({
     variables: {

@@ -8,32 +8,32 @@ export type GetRandomBookQuery = { __typename?: "Query" } & {
   >
 }
 
+export type PoemDetailsFragment = { __typename?: "PoemType" } & Pick<
+  Types.PoemType,
+  "id" | "backgroundId" | "colorRange" | "createdAt" | "updatedAt"
+> & {
+    author?: Types.Maybe<
+      { __typename?: "UserType" } & Pick<Types.UserType, "id" | "username">
+    >
+    book: { __typename?: "BookType" } & Pick<Types.BookType, "id" | "title">
+    textChunks?: Types.Maybe<
+      Array<
+        Types.Maybe<
+          { __typename?: "TextChunkType" } & Pick<
+            Types.TextChunkType,
+            "text" | "isSelected"
+          >
+        >
+      >
+    >
+  }
+
 export type GetSinglePoemQueryVariables = Types.Exact<{
   id: Types.Scalars["ID"]
 }>
 
 export type GetSinglePoemQuery = { __typename?: "Query" } & {
-  poem?: Types.Maybe<
-    { __typename?: "PoemType" } & Pick<
-      Types.PoemType,
-      "id" | "backgroundId" | "colorRange" | "createdAt" | "updatedAt"
-    > & {
-        textChunks?: Types.Maybe<
-          Array<
-            Types.Maybe<
-              { __typename?: "TextChunkType" } & Pick<
-                Types.TextChunkType,
-                "text" | "isSelected"
-              >
-            >
-          >
-        >
-        author?: Types.Maybe<
-          { __typename?: "UserType" } & Pick<Types.UserType, "id" | "username">
-        >
-        book: { __typename?: "BookType" } & Pick<Types.BookType, "id" | "title">
-      }
-  >
+  poem?: Types.Maybe<{ __typename?: "PoemType" } & PoemDetailsFragment>
   current?: Types.Maybe<
     { __typename?: "UserType" } & Pick<Types.UserType, "id">
   >
@@ -43,35 +43,7 @@ export type GetPoemsQueryVariables = Types.Exact<{ [key: string]: never }>
 
 export type GetPoemsQuery = { __typename?: "Query" } & {
   poems?: Types.Maybe<
-    Array<
-      Types.Maybe<
-        { __typename?: "PoemType" } & Pick<
-          Types.PoemType,
-          "id" | "backgroundId" | "colorRange" | "createdAt" | "updatedAt"
-        > & {
-            textChunks?: Types.Maybe<
-              Array<
-                Types.Maybe<
-                  { __typename?: "TextChunkType" } & Pick<
-                    Types.TextChunkType,
-                    "text" | "isSelected"
-                  >
-                >
-              >
-            >
-            author?: Types.Maybe<
-              { __typename?: "UserType" } & Pick<
-                Types.UserType,
-                "id" | "username"
-              >
-            >
-            book: { __typename?: "BookType" } & Pick<
-              Types.BookType,
-              "id" | "title"
-            >
-          }
-      >
-    >
+    Array<Types.Maybe<{ __typename?: "PoemType" } & PoemDetailsFragment>>
   >
 }
 
@@ -81,35 +53,7 @@ export type GetPoemsByAuthorQueryVariables = Types.Exact<{
 
 export type GetPoemsByAuthorQuery = { __typename?: "Query" } & {
   poems?: Types.Maybe<
-    Array<
-      Types.Maybe<
-        { __typename?: "PoemType" } & Pick<
-          Types.PoemType,
-          "id" | "backgroundId" | "colorRange" | "createdAt" | "updatedAt"
-        > & {
-            textChunks?: Types.Maybe<
-              Array<
-                Types.Maybe<
-                  { __typename?: "TextChunkType" } & Pick<
-                    Types.TextChunkType,
-                    "text" | "isSelected"
-                  >
-                >
-              >
-            >
-            author?: Types.Maybe<
-              { __typename?: "UserType" } & Pick<
-                Types.UserType,
-                "id" | "username"
-              >
-            >
-            book: { __typename?: "BookType" } & Pick<
-              Types.BookType,
-              "id" | "title"
-            >
-          }
-      >
-    >
+    Array<Types.Maybe<{ __typename?: "PoemType" } & PoemDetailsFragment>>
   >
 }
 
@@ -142,9 +86,7 @@ export type UpdatePoemMutationVariables = Types.Exact<{
 export type UpdatePoemMutation = { __typename?: "Mutation" } & {
   updatePoem?: Types.Maybe<
     { __typename?: "UpdatePoemMutation" } & {
-      poem?: Types.Maybe<
-        { __typename?: "PoemType" } & Pick<Types.PoemType, "id">
-      >
+      poem?: Types.Maybe<{ __typename?: "PoemType" } & PoemDetailsFragment>
     }
   >
 }

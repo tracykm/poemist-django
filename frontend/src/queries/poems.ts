@@ -1,25 +1,31 @@
 import gql from "graphql-tag"
 
+const PoemDetails = gql`
+  fragment PoemDetails on PoemType {
+    id
+    backgroundId
+    colorRange
+    createdAt
+    updatedAt
+    author {
+      id
+      username
+    }
+    book {
+      id
+      title
+    }
+    textChunks {
+      text
+      isSelected
+    }
+  }
+`
+
 export const getSinglePoem = gql`
   query getSinglePoem($id: ID!) {
     poem(id: $id) {
-      id
-      backgroundId
-      colorRange
-      textChunks {
-        text
-        isSelected
-      }
-      author {
-        id
-        username
-      }
-      book {
-        id
-        title
-      }
-      createdAt
-      updatedAt
+      ...PoemDetails
     }
     current {
       id
@@ -30,23 +36,7 @@ export const getSinglePoem = gql`
 export const getPoems = gql`
   query getPoems {
     poems {
-      id
-      backgroundId
-      colorRange
-      textChunks {
-        text
-        isSelected
-      }
-      author {
-        id
-        username
-      }
-      book {
-        id
-        title
-      }
-      createdAt
-      updatedAt
+      ...PoemDetails
     }
   }
 `
@@ -54,23 +44,7 @@ export const getPoems = gql`
 export const getPoemsByAuthor = gql`
   query getPoemsByAuthor($authorId: ID) {
     poems(authorId: $authorId) {
-      id
-      backgroundId
-      colorRange
-      textChunks {
-        text
-        isSelected
-      }
-      author {
-        id
-        username
-      }
-      book {
-        id
-        title
-      }
-      createdAt
-      updatedAt
+      ...PoemDetails
     }
   }
 `
@@ -99,7 +73,7 @@ export const updatePoem = gql`
       colorRange: $colorRange
     ) {
       poem {
-        id
+        ...PoemDetails
       }
     }
   }

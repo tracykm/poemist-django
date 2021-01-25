@@ -2,7 +2,27 @@ import * as Types from "./operations"
 
 import { gql } from "@apollo/client"
 import * as Apollo from "@apollo/client"
-
+export const PoemDetailsFragmentDoc = gql`
+  fragment PoemDetails on PoemType {
+    id
+    backgroundId
+    colorRange
+    createdAt
+    updatedAt
+    author {
+      id
+      username
+    }
+    book {
+      id
+      title
+    }
+    textChunks {
+      text
+      isSelected
+    }
+  }
+`
 export const GetRandomBookDocument = gql`
   query getRandomBook {
     randomBook {
@@ -63,28 +83,13 @@ export type GetRandomBookQueryResult = Apollo.QueryResult<
 export const GetSinglePoemDocument = gql`
   query getSinglePoem($id: ID!) {
     poem(id: $id) {
-      id
-      backgroundId
-      colorRange
-      textChunks {
-        text
-        isSelected
-      }
-      author {
-        id
-        username
-      }
-      book {
-        id
-        title
-      }
-      createdAt
-      updatedAt
+      ...PoemDetails
     }
     current {
       id
     }
   }
+  ${PoemDetailsFragmentDoc}
 `
 
 /**
@@ -138,25 +143,10 @@ export type GetSinglePoemQueryResult = Apollo.QueryResult<
 export const GetPoemsDocument = gql`
   query getPoems {
     poems {
-      id
-      backgroundId
-      colorRange
-      textChunks {
-        text
-        isSelected
-      }
-      author {
-        id
-        username
-      }
-      book {
-        id
-        title
-      }
-      createdAt
-      updatedAt
+      ...PoemDetails
     }
   }
+  ${PoemDetailsFragmentDoc}
 `
 
 /**
@@ -207,25 +197,10 @@ export type GetPoemsQueryResult = Apollo.QueryResult<
 export const GetPoemsByAuthorDocument = gql`
   query getPoemsByAuthor($authorId: ID) {
     poems(authorId: $authorId) {
-      id
-      backgroundId
-      colorRange
-      textChunks {
-        text
-        isSelected
-      }
-      author {
-        id
-        username
-      }
-      book {
-        id
-        title
-      }
-      createdAt
-      updatedAt
+      ...PoemDetails
     }
   }
+  ${PoemDetailsFragmentDoc}
 `
 
 /**
@@ -341,10 +316,11 @@ export const UpdatePoemDocument = gql`
       colorRange: $colorRange
     ) {
       poem {
-        id
+        ...PoemDetails
       }
     }
   }
+  ${PoemDetailsFragmentDoc}
 `
 export type UpdatePoemMutationFn = Apollo.MutationFunction<
   Types.UpdatePoemMutation,
