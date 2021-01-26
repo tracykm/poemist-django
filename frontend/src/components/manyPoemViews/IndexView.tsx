@@ -2,6 +2,8 @@ import React from "react"
 import Poem from "src/components/poem/Poem"
 import styled from "styled-components"
 import { GetPoemsQuery } from "src/queries/autogenerate/operations"
+import InfiniteScroll from "react-infinite-scroller"
+import Loader from "../universal/Loader"
 
 export const LoadingPoemDiv = styled.div`
   width: 250px;
@@ -25,25 +27,25 @@ export const PoemContainerDiv = styled.div`
 
 export default function IndexView({
   poems,
-  hasMore,
-  loadMore,
+  fetchMore,
 }: {
-  poems: GetPoemsQuery["poems"]
-  hasMore?: boolean
-  loadMore?: (page: number) => Promise<any>
+  poems: GetPoemsQuery["poemPages"]
+  fetchMore?: (vars: any) => Promise<any>
 }) {
   return (
     <PoemContainerDiv>
-      {/* <InfiniteScroll
-        loadMore={loadMore}
-        hasMore={hasMore}
-        loader={<Loader key="loader" />}
-      > */}
-      {poems &&
-        poems.map((poem) => {
-          return <Poem poem={poem} key={poem.id} />
-        })}
-      {/* </InfiniteScroll> */}
+      <InfiniteScroll
+        loadMore={(page) => {
+          return fetchMore({ variables: { offset: 10 * page, limit: 10 } })
+        }}
+        hasMore={!(poems.edges.length % 10)}
+        loader={<Loader />}
+      >
+        {poems &&
+          poems.edges.map((poem) => {
+            return <Poem poem={poem} key={poem.id} />
+          })}
+      </InfiniteScroll>
     </PoemContainerDiv>
   )
 }

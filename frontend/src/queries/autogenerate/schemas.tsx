@@ -29,6 +29,7 @@ export type Query = {
   poem?: Maybe<PoemType>
   user?: Maybe<UserType>
   poems?: Maybe<Array<Maybe<PoemType>>>
+  poemPages?: Maybe<PomePaginationType>
   users?: Maybe<Array<Maybe<UserType>>>
   current?: Maybe<UserType>
 }
@@ -42,6 +43,12 @@ export type QueryUserArgs = {
 }
 
 export type QueryPoemsArgs = {
+  authorId?: Maybe<Scalars["ID"]>
+}
+
+export type QueryPoemPagesArgs = {
+  offset?: Maybe<Scalars["Int"]>
+  limit?: Maybe<Scalars["Int"]>
   authorId?: Maybe<Scalars["ID"]>
 }
 
@@ -123,6 +130,12 @@ export type TextChunkType = {
   __typename?: "TextChunkType"
   text?: Maybe<Scalars["String"]>
   isSelected?: Maybe<Scalars["Boolean"]>
+}
+
+export type PomePaginationType = {
+  __typename?: "PomePaginationType"
+  totalCount?: Maybe<Scalars["Int"]>
+  edges?: Maybe<Array<Maybe<PoemType>>>
 }
 
 export type Mutation = {

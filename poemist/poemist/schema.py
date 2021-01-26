@@ -5,6 +5,14 @@ from db.models import Book, Poem
 from django.contrib.auth.models import User
 from graphene_django.debug import DjangoDebug
 
+class PaginationType(graphene.ObjectType):
+    total_count = graphene.Int()
+
+class PomePaginationType(PaginationType):
+    class Meta:
+        gql_type = PoemType
+    edges = graphene.List(PoemType)
+
 class CreatePoemMutation(graphene.Mutation):
     class Arguments:
         text_chunks = graphene.List(InputTextChunkType)
@@ -81,6 +89,17 @@ class Query(graphene.ObjectType):
         if (author_id):
             return Poem.objects.filter(author_id=author_id)
         return Poem.objects.all()
+
+    poem_pages = graphene.Field(PomePaginationType, offset=graphene.Int(required=False), limit=graphene.Int(required=False), author_id=graphene.ID(required=False))
+    def resolve_poem_pages(parent, info, offset=0, limit=10, author_id=None):
+        poems = Poem.objects.order_by("created_at")
+        if (author_id):
+            poems.filter(author_id=author_id)
+        total_count = poems.count()
+        return {
+            "edges": poems[offset:offset+limit], 
+            "total_count": total_count
+        }
 
     users = graphene.List(UserType)
     def resolve_users(parent, info):

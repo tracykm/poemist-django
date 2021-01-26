@@ -39,21 +39,34 @@ export type GetSinglePoemQuery = { __typename?: "Query" } & {
   >
 }
 
-export type GetPoemsQueryVariables = Types.Exact<{ [key: string]: never }>
+export type GetPoemsQueryVariables = Types.Exact<{
+  offset?: Types.Maybe<Types.Scalars["Int"]>
+  limit?: Types.Maybe<Types.Scalars["Int"]>
+}>
 
 export type GetPoemsQuery = { __typename?: "Query" } & {
-  poems?: Types.Maybe<
-    Array<Types.Maybe<{ __typename?: "PoemType" } & PoemDetailsFragment>>
+  poemPages?: Types.Maybe<
+    { __typename?: "PomePaginationType" } & {
+      edges?: Types.Maybe<
+        Array<Types.Maybe<{ __typename?: "PoemType" } & PoemDetailsFragment>>
+      >
+    }
   >
 }
 
 export type GetPoemsByAuthorQueryVariables = Types.Exact<{
   authorId?: Types.Maybe<Types.Scalars["ID"]>
+  offset?: Types.Maybe<Types.Scalars["Int"]>
+  limit?: Types.Maybe<Types.Scalars["Int"]>
 }>
 
 export type GetPoemsByAuthorQuery = { __typename?: "Query" } & {
-  poems?: Types.Maybe<
-    Array<Types.Maybe<{ __typename?: "PoemType" } & PoemDetailsFragment>>
+  poemPages?: Types.Maybe<
+    { __typename?: "PomePaginationType" } & {
+      edges?: Types.Maybe<
+        Array<Types.Maybe<{ __typename?: "PoemType" } & PoemDetailsFragment>>
+      >
+    }
   >
 }
 

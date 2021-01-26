@@ -141,9 +141,11 @@ export type GetSinglePoemQueryResult = Apollo.QueryResult<
   Types.GetSinglePoemQueryVariables
 >
 export const GetPoemsDocument = gql`
-  query getPoems {
-    poems {
-      ...PoemDetails
+  query getPoems($offset: Int, $limit: Int) {
+    poemPages(offset: $offset, limit: $limit) {
+      edges {
+        ...PoemDetails
+      }
     }
   }
   ${PoemDetailsFragmentDoc}
@@ -161,6 +163,8 @@ export const GetPoemsDocument = gql`
  * @example
  * const { data, loading, error } = useGetPoemsQuery({
  *   variables: {
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
  *   },
  * });
  */
@@ -195,9 +199,11 @@ export type GetPoemsQueryResult = Apollo.QueryResult<
   Types.GetPoemsQueryVariables
 >
 export const GetPoemsByAuthorDocument = gql`
-  query getPoemsByAuthor($authorId: ID) {
-    poems(authorId: $authorId) {
-      ...PoemDetails
+  query getPoemsByAuthor($authorId: ID, $offset: Int, $limit: Int) {
+    poemPages(authorId: $authorId, offset: $offset, limit: $limit) {
+      edges {
+        ...PoemDetails
+      }
     }
   }
   ${PoemDetailsFragmentDoc}
@@ -216,6 +222,8 @@ export const GetPoemsByAuthorDocument = gql`
  * const { data, loading, error } = useGetPoemsByAuthorQuery({
  *   variables: {
  *      authorId: // value for 'authorId'
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
  *   },
  * });
  */

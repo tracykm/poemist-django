@@ -34,17 +34,21 @@ export const getSinglePoem = gql`
 `
 
 export const getPoems = gql`
-  query getPoems {
-    poems {
-      ...PoemDetails
+  query getPoems($offset: Int, $limit: Int) {
+    poemPages(offset: $offset, limit: $limit) {
+      edges {
+        ...PoemDetails
+      }
     }
   }
 `
 
 export const getPoemsByAuthor = gql`
-  query getPoemsByAuthor($authorId: ID) {
-    poems(authorId: $authorId) {
-      ...PoemDetails
+  query getPoemsByAuthor($authorId: ID, $offset: Int, $limit: Int) {
+    poemPages(authorId: $authorId, offset: $offset, limit: $limit) {
+      edges {
+        ...PoemDetails
+      }
     }
   }
 `
