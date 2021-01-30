@@ -5,13 +5,17 @@ from db.models import Book, Poem
 from django.contrib.auth.models import User
 from graphene_django.debug import DjangoDebug
 
+
 class PaginationType(graphene.ObjectType):
     total_count = graphene.Int()
+
 
 class PomePaginationType(PaginationType):
     class Meta:
         gql_type = PoemType
+
     edges = graphene.List(PoemType)
+
 
 class CreatePoemMutation(graphene.Mutation):
     class Arguments:
@@ -23,7 +27,9 @@ class CreatePoemMutation(graphene.Mutation):
 
     @classmethod
     def mutate(cls, root, info, text_chunks, book_id):
-        poem = Poem.objects.create(passage="", book_id=book_id, author=User.objects.first())
+        poem = Poem.objects.create(
+            passage="", book_id=book_id, author=User.objects.first()
+        )
         poem.save_text_chunks(text_chunks)
         return CreatePoemMutation(poem=poem)
 
@@ -49,6 +55,7 @@ class UpdatePoemMutation(graphene.Mutation):
         poem.save()
         return UpdatePoemMutation(poem=poem)
 
+
 class DeletePoemMutation(graphene.Mutation):
     class Arguments:
         id = graphene.ID()
@@ -68,45 +75,56 @@ class Mutation(graphene.ObjectType):
     update_poem = UpdatePoemMutation.Field()
     delete_poem = DeletePoemMutation.Field()
 
+
 class Query(graphene.ObjectType):
-    debug = graphene.Field(DjangoDebug, name='_debug')
+    debug = graphene.Field(DjangoDebug, name="_debug")
     hello = graphene.String(default_value="Hi!")
 
     random_book = graphene.Field(BookType)
+
     def resolve_random_book(parent, info):
         return Book.objects.order_by("?").first()
 
     poem = graphene.Field(PoemType, id=graphene.ID(required=True))
+
     def resolve_poem(parent, info, id):
         return Poem.objects.get(id=id)
 
     user = graphene.Field(UserType, id=graphene.ID(required=True))
+
     def resolve_user(parent, info, id):
         return User.objects.get(id=id)
 
     poems = graphene.List(PoemType, author_id=graphene.ID(required=False))
+
     def resolve_poems(parent, info, author_id=None):
-        if (author_id):
+        if author_id:
             return Poem.objects.filter(author_id=author_id)
         return Poem.objects.all()
 
-    poem_pages = graphene.Field(PomePaginationType, offset=graphene.Int(required=False), limit=graphene.Int(required=False), author_id=graphene.ID(required=False))
+    poem_pages = graphene.Field(
+        PomePaginationType,
+        offset=graphene.Int(required=False),
+        limit=graphene.Int(required=False),
+        author_id=graphene.ID(required=False),
+    )
+
     def resolve_poem_pages(parent, info, offset=0, limit=10, author_id=None):
-        poems = Poem.objects.order_by("created_at")
-        if (author_id):
+        poems = Poem.objects.order_by("-created_at")
+        if author_id:
             poems.filter(author_id=author_id)
         total_count = poems.count()
-        return {
-            "edges": poems[offset:offset+limit], 
-            "total_count": total_count
-        }
+        return {"edges": poems[offset : offset + limit], "total_count": total_count}
 
     users = graphene.List(UserType)
+
     def resolve_users(parent, info):
         return User.objects.all()
 
     current = graphene.Field(UserType)
+
     def resolve_current(parent, info):
         return User.objects.first()
+
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
