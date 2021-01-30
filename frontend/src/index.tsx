@@ -13,7 +13,7 @@ const DEV_API = "http://localhost:8000/graphql"
 const STAGING_API = "https://calm-lowlands-48993.herokuapp.com/graphql"
 
 const client = new ApolloClient({
-  uri: DEV_API,
+  uri: STAGING_API,
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
