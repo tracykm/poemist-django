@@ -2,6 +2,8 @@ from graphene_django import DjangoObjectType
 import graphene
 from .models import Book, Poem
 from django.contrib.auth.models import User
+
+
 class UserType(DjangoObjectType):
     class Meta:
         model = User
@@ -10,14 +12,15 @@ class UserType(DjangoObjectType):
             "date_joined",
             "email",
             "username",
-            "session_token"
-            "first_name",
+            "session_token" "first_name",
             "poems",
         )
+
     poems_written_count = graphene.Int()
 
     def resolve_poems_written_count(parent, info):
         return parent.poems.count()
+
 
 class BookType(DjangoObjectType):
     class Meta:
@@ -31,12 +34,16 @@ class BookType(DjangoObjectType):
             "text",
         )
 
+
 class TextChunkType(graphene.ObjectType):
     text = graphene.String()
     is_selected = graphene.Boolean()
+
+
 class InputTextChunkType(graphene.InputObjectType):
     text = graphene.String()
     is_selected = graphene.Boolean()
+
 
 class PoemType(DjangoObjectType):
     class Meta:
@@ -49,13 +56,15 @@ class PoemType(DjangoObjectType):
             "author",
             "color_range",
             "background_id",
-            "book"
+            "book",
         )
+
     text_chunks = graphene.List(TextChunkType)
 
-
     def resolve_text_chunks(parent, info):
-        return info.context.selected_texts_loader.load(parent.id).then(lambda selected_texts: parent.text_chunks(selected_texts))
+        return info.context.selected_texts_loader.load(parent.id).then(
+            lambda selected_texts: parent.text_chunks(selected_texts)
+        )
 
     author = graphene.Field(lambda: UserType)
 

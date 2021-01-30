@@ -9,29 +9,42 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('db', '0001_initial'),
+        ("db", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='poem',
-            name='book',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='poems', to='db.book'),
+            model_name="poem",
+            name="book",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="poems",
+                to="db.book",
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='poem',
-            name='start_idx',
+            model_name="poem",
+            name="start_idx",
             field=models.IntegerField(null=True),
         ),
         migrations.AlterField(
-            model_name='poem',
-            name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='poems', to=settings.AUTH_USER_MODEL),
+            model_name="poem",
+            name="author",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="poems",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AlterField(
-            model_name='selectedtext',
-            name='poem',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='selected_texts', to='db.poem'),
+            model_name="selectedtext",
+            name="poem",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="selected_texts",
+                to="db.poem",
+            ),
         ),
     ]

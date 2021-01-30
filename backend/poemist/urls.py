@@ -17,14 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from .views import ping
 from graphene_django.views import GraphQLView
-from db.views import  CustomGraphQLView
+from db.views import CustomGraphQLView
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('ping/', ping, name="ping"),
+    path("admin/", admin.site.urls),
+    path("ping/", ping, name="ping"),
     path("graphql", csrf_exempt(CustomGraphQLView.as_view(graphiql=True))),
 ]
 
 from django.urls import path
-
