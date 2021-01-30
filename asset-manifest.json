@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/static/js/main.f29046b9.chunk.js",
+    "main.js.map": "/static/js/main.f29046b9.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.7f9263fe.js",
+    "runtime-main.js.map": "/static/js/runtime-main.7f9263fe.js.map",
+    "static/js/2.10a5c24c.chunk.js": "/static/js/2.10a5c24c.chunk.js",
+    "static/js/2.10a5c24c.chunk.js.map": "/static/js/2.10a5c24c.chunk.js.map",
+    "static/js/3.495c5c64.chunk.js": "/static/js/3.495c5c64.chunk.js",
+    "static/js/3.495c5c64.chunk.js.map": "/static/js/3.495c5c64.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.10a5c24c.chunk.js.LICENSE.txt": "/static/js/2.10a5c24c.chunk.js.LICENSE.txt",
+    "static/media/1_mU0yXR99Bg91S1ACSyPq_w.1960b2a2.jpg": "/static/media/1_mU0yXR99Bg91S1ACSyPq_w.1960b2a2.jpg",
+    "static/media/4345189-xs.488cc791.jpg": "/static/media/4345189-xs.488cc791.jpg",
+    "static/media/Alcala_lg.fae98355.jpg": "/static/media/Alcala_lg.fae98355.jpg",
+    "static/media/blue.9dcb9750.jpg": "/static/media/blue.9dcb9750.jpg",
+    "static/media/blueTile.b092c647.jpg": "/static/media/blueTile.b092c647.jpg",
+    "static/media/contemporary_china_small.de76a51e.png": "/static/media/contemporary_china_small.de76a51e.png",
+    "static/media/example-clicking.gif": "/static/media/example-clicking.f7137e63.gif",
+    "static/media/f0c4457.f1a0d7a4.jpg": "/static/media/f0c4457.f1a0d7a4.jpg",
+    "static/media/life_original_wild_urban_shells_abstract_texture_love-572258.16701eac.jpg": "/static/media/life_original_wild_urban_shells_abstract_texture_love-572258.16701eac.jpg",
+    "static/media/map2.3c916e96.jpg": "/static/media/map2.3c916e96.jpg",
+    "static/media/maxresdefault.4be2421c.jpg": "/static/media/maxresdefault.4be2421c.jpg",
+    "static/media/painting-cracks.aef5b50c.jpg": "/static/media/painting-cracks.aef5b50c.jpg",
+    "static/media/paper-rect-contrast.e66685ca.jpg": "/static/media/paper-rect-contrast.e66685ca.jpg",
+    "static/media/tree-bark.32958e04.jpg": "/static/media/tree-bark.32958e04.jpg",
+    "static/media/triangles-123.3dd0203b.jpg": "/static/media/triangles-123.3dd0203b.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7f9263fe.js",
+    "static/js/2.10a5c24c.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.f29046b9.chunk.js"
+  ]
+}
