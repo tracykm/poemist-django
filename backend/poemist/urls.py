@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import ping
-from graphene_django.views import GraphQLView
 from db.views import CustomGraphQLView
 from django.views.decorators.csrf import csrf_exempt
 

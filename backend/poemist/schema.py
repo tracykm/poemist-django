@@ -4,6 +4,7 @@ from db.gql_types import BookType, PoemType, UserType, InputTextChunkType
 from db.models import Book, Poem
 from django.contrib.auth.models import User
 from graphene_django.debug import DjangoDebug
+import graphql_jwt
 
 
 class PaginationType(graphene.ObjectType):
@@ -74,6 +75,9 @@ class Mutation(graphene.ObjectType):
     create_poem = CreatePoemMutation.Field()
     update_poem = UpdatePoemMutation.Field()
     delete_poem = DeletePoemMutation.Field()
+    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+    verify_token = graphql_jwt.Verify.Field()
+    refresh_token = graphql_jwt.Refresh.Field()
 
 
 class Query(graphene.ObjectType):

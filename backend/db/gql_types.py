@@ -62,11 +62,11 @@ class PoemType(DjangoObjectType):
     text_chunks = graphene.List(TextChunkType)
 
     def resolve_text_chunks(parent, info):
-        return info.context.selected_texts_loader.load(parent.id).then(
+        return info.context.ctx.selected_texts_loader.load(parent.id).then(
             lambda selected_texts: parent.text_chunks(selected_texts)
         )
 
     author = graphene.Field(lambda: UserType)
 
     def resolve_author(parent, info):
-        return info.context.user_loader.load(parent.author_id)
+        return info.context.ctx.user_loader.load(parent.author_id)

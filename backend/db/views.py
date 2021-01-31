@@ -38,4 +38,5 @@ class GQLContext:
 
 class CustomGraphQLView(GraphQLView):
     def get_context(self, request):
-        return GQLContext(request)
+        request.ctx = GQLContext(request)
+        return request
