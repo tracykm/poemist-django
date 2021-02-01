@@ -22,3 +22,11 @@ export const getUser = gql`
     }
   }
 `
+
+export const loginUser = gql`
+  mutation loginUser($username: String!, $password: String!) {
+    tokenAuth(username: $username, password: $password) {
+      token
+    }
+  }
+`

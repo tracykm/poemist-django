@@ -17,12 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from .views import ping
 from db.views import CustomGraphQLView
+from graphql_jwt.decorators import jwt_cookie
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("ping/", ping, name="ping"),
-    path("graphql", csrf_exempt(CustomGraphQLView.as_view(graphiql=True))),
+    path("graphql", csrf_exempt(jwt_cookie(CustomGraphQLView.as_view(graphiql=True)))),
 ]
-
-from django.urls import path

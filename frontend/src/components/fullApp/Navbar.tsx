@@ -5,6 +5,7 @@ import NavbarDiv from "./NavbarDiv"
 import { Select, MenuItem } from "@material-ui/core"
 import { useHistory } from "react-router-dom"
 import { useGetCurrentUserQuery } from "src/queries/autogenerate/hooks"
+import LoginModal from "./LoginModal"
 
 const LogInOut = ({ toggleShowLogin }: { toggleShowLogin: () => void }) => (
   <span>
@@ -57,7 +58,7 @@ function Navbar() {
               <MenuItem
                 onClick={() => {
                   localStorage.clear()
-                  // location.reload()
+                  window.location.reload()
                 }}
               >
                 Logout
@@ -83,6 +84,7 @@ export default function FullNav() {
         <PoemistLogo />
       </NavLink>
       <Navbar />
+      <LoginModal />
     </NavbarDiv>
   )
 }

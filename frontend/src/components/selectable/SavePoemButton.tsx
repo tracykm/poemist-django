@@ -4,7 +4,6 @@ import {
   useCreatePoemMutation,
 } from "src/queries/autogenerate/hooks"
 import getSelectedTexts from "src/utils/getSelectedTexts"
-import { GetSinglePoemDocument } from "src/queries/autogenerate/hooks"
 
 export default function SavePoemButton({ poem, children }) {
   let { id, textChunks, backgroundId, colorRange, book } = poem

@@ -29,7 +29,7 @@ class CreatePoemMutation(graphene.Mutation):
     @classmethod
     def mutate(cls, root, info, text_chunks, book_id):
         poem = Poem.objects.create(
-            passage="", book_id=book_id, author=User.objects.first()
+            passage="", book_id=book_id, author=info.context.user
         )
         poem.save_text_chunks(text_chunks)
         return CreatePoemMutation(poem=poem)
@@ -67,7 +67,6 @@ class DeletePoemMutation(graphene.Mutation):
     def mutate(cls, root, info, id):
         poem = Poem.objects.get(id=id)
         poem.delete()
-        # breakpoint()
         return DeletePoemMutation(id=id)
 
 
@@ -128,7 +127,7 @@ class Query(graphene.ObjectType):
     current = graphene.Field(UserType)
 
     def resolve_current(parent, info):
-        return User.objects.first()
+        return info.context.user
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

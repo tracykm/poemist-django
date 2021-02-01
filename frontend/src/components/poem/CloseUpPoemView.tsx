@@ -7,12 +7,12 @@ import { useParams } from "react-router-dom"
 
 export default function CloseUpPoemView() {
   const { id } = useParams<{ id: string }>()
-  const { data, loading } = useGetSinglePoemQuery({
+  const { data } = useGetSinglePoemQuery({
     variables: {
       id,
     },
   })
-  if (loading) return <Loader />
+  if (!data?.poem) return <Loader />
   return (
     <CloseUpPoemDiv>
       <Poem poem={data.poem} closeUp />

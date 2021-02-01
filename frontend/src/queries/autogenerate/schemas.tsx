@@ -19,6 +19,12 @@ export type Scalars = {
    * [iso8601](https://en.wikipedia.org/wiki/ISO_8601).
    */
   DateTime: any
+  /**
+   * The `GenericScalar` scalar type represents a generic
+   * GraphQL scalar value that could be:
+   * String, Boolean, Int, Float, List or Object.
+   */
+  GenericScalar: any
 }
 
 export type Query = {
@@ -143,6 +149,10 @@ export type Mutation = {
   createPoem?: Maybe<CreatePoemMutation>
   updatePoem?: Maybe<UpdatePoemMutation>
   deletePoem?: Maybe<DeletePoemMutation>
+  /** Obtain JSON Web Token mutation */
+  tokenAuth?: Maybe<ObtainJsonWebToken>
+  verifyToken?: Maybe<Verify>
+  refreshToken?: Maybe<Refresh>
 }
 
 export type MutationCreatePoemArgs = {
@@ -159,6 +169,19 @@ export type MutationUpdatePoemArgs = {
 
 export type MutationDeletePoemArgs = {
   id?: Maybe<Scalars["ID"]>
+}
+
+export type MutationTokenAuthArgs = {
+  username: Scalars["String"]
+  password: Scalars["String"]
+}
+
+export type MutationVerifyTokenArgs = {
+  token?: Maybe<Scalars["String"]>
+}
+
+export type MutationRefreshTokenArgs = {
+  token?: Maybe<Scalars["String"]>
 }
 
 export type CreatePoemMutation = {
@@ -179,4 +202,24 @@ export type UpdatePoemMutation = {
 export type DeletePoemMutation = {
   __typename?: "DeletePoemMutation"
   id?: Maybe<Scalars["String"]>
+}
+
+/** Obtain JSON Web Token mutation */
+export type ObtainJsonWebToken = {
+  __typename?: "ObtainJSONWebToken"
+  payload: Scalars["GenericScalar"]
+  refreshExpiresIn: Scalars["Int"]
+  token: Scalars["String"]
+}
+
+export type Verify = {
+  __typename?: "Verify"
+  payload: Scalars["GenericScalar"]
+}
+
+export type Refresh = {
+  __typename?: "Refresh"
+  payload: Scalars["GenericScalar"]
+  refreshExpiresIn: Scalars["Int"]
+  token: Scalars["String"]
 }

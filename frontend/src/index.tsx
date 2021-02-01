@@ -5,15 +5,32 @@ import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 import { HashRouter as Router } from "react-router-dom"
 
-import { ApolloClient, InMemoryCache } from "@apollo/client"
+import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client"
+import { setContext } from "@apollo/client/link/context"
 import { ApolloProvider } from "@apollo/client"
 import produce from "immer"
 
 const DEV_API = "http://localhost:8000/graphql"
 const STAGING_API = "https://calm-lowlands-48993.herokuapp.com/graphql"
 
+const httpLink = createHttpLink({
+  uri: DEV_API,
+})
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem("token")
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      Authorization: token ? `JWT ${token}` : "",
+    },
+  }
+})
+
 const client = new ApolloClient({
-  uri: STAGING_API,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
@@ -25,13 +42,13 @@ const client = new ApolloClient({
             // Concatenate the incoming list items with
             // the existing list items.
             merge(existing = { edges: [] }, incoming) {
-              debugger
+              // debugger
               if (incoming.type === "DELETE") {
                 const newEdges = produce(existing.edges, (draft: any[]) => {
                   var idx = draft.findIndex((d) => d.id === incoming.payload.id)
                   draft.splice(idx, 1)
                 })
-                debugger
+                // debugger
                 return newEdges
               }
               return {
