@@ -22,7 +22,7 @@ function Navbar() {
   return (
     <div
       className="navbar"
-      style={{ display: "inline-block", minWidth: 345, marginRight: "-1rem" }}
+      style={{ display: "inline-block", minWidth: 345, marginRight: "1rem" }}
     >
       <div />
       <ul className={"navbarMenu expanded"}>

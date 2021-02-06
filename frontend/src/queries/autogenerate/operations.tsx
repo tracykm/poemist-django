@@ -138,6 +138,21 @@ export type GetUserQuery = { __typename?: "Query" } & {
   >
 }
 
+export type CreateUserMutationVariables = Types.Exact<{
+  username: Types.Scalars["String"]
+  password: Types.Scalars["String"]
+}>
+
+export type CreateUserMutation = { __typename?: "Mutation" } & {
+  createUser?: Types.Maybe<
+    { __typename?: "CreateUserMutation" } & {
+      user?: Types.Maybe<
+        { __typename?: "UserType" } & Pick<Types.UserType, "id">
+      >
+    }
+  >
+}
+
 export type LoginUserMutationVariables = Types.Exact<{
   username: Types.Scalars["String"]
   password: Types.Scalars["String"]

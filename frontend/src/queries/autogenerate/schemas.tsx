@@ -153,6 +153,7 @@ export type Mutation = {
   tokenAuth?: Maybe<ObtainJsonWebToken>
   verifyToken?: Maybe<Verify>
   refreshToken?: Maybe<Refresh>
+  createUser?: Maybe<CreateUserMutation>
 }
 
 export type MutationCreatePoemArgs = {
@@ -182,6 +183,11 @@ export type MutationVerifyTokenArgs = {
 
 export type MutationRefreshTokenArgs = {
   token?: Maybe<Scalars["String"]>
+}
+
+export type MutationCreateUserArgs = {
+  password?: Maybe<Scalars["String"]>
+  username?: Maybe<Scalars["String"]>
 }
 
 export type CreatePoemMutation = {
@@ -222,4 +228,9 @@ export type Refresh = {
   payload: Scalars["GenericScalar"]
   refreshExpiresIn: Scalars["Int"]
   token: Scalars["String"]
+}
+
+export type CreateUserMutation = {
+  __typename?: "CreateUserMutation"
+  user?: Maybe<UserType>
 }

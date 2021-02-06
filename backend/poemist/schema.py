@@ -70,6 +70,22 @@ class DeletePoemMutation(graphene.Mutation):
         return DeletePoemMutation(id=id)
 
 
+class CreateUserMutation(graphene.Mutation):
+    class Arguments:
+        username = graphene.String()
+        password = graphene.String()
+
+    # The class attributes define the response of the mutation
+    user = graphene.Field(UserType)
+
+    @classmethod
+    def mutate(cls, root, info, username, password):
+        user = User.objects.create(username=username, password=password)
+        user.set_password(password)
+        user.save()
+        return CreateUserMutation(user=user)
+
+
 class Mutation(graphene.ObjectType):
     create_poem = CreatePoemMutation.Field()
     update_poem = UpdatePoemMutation.Field()
@@ -77,6 +93,7 @@ class Mutation(graphene.ObjectType):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
     verify_token = graphql_jwt.Verify.Field()
     refresh_token = graphql_jwt.Refresh.Field()
+    create_user = CreateUserMutation.Field()
 
 
 class Query(graphene.ObjectType):
@@ -115,7 +132,7 @@ class Query(graphene.ObjectType):
     def resolve_poem_pages(parent, info, offset=0, limit=10, author_id=None):
         poems = Poem.objects.order_by("-created_at")
         if author_id:
-            poems.filter(author_id=author_id)
+            poems = poems.filter(author_id=author_id)
         total_count = poems.count()
         return {"edges": poems[offset : offset + limit], "total_count": total_count}
 

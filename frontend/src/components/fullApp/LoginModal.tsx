@@ -7,8 +7,11 @@ import {
   TextField,
 } from "@material-ui/core"
 import React, { useState } from "react"
-import { useHistory, useLocation } from "react-router-dom"
-import { useLoginUserMutation } from "src/queries/autogenerate/hooks"
+import { Link, useHistory, useLocation } from "react-router-dom"
+import {
+  useLoginUserMutation,
+  useCreateUserMutation,
+} from "src/queries/autogenerate/hooks"
 
 export default function LoginDialog() {
   const handleClose = () => history.push("/")
@@ -17,22 +20,30 @@ export default function LoginDialog() {
     password: "password",
   })
   const [loginInUserMutation] = useLoginUserMutation()
+  const [createUserMutation] = useCreateUserMutation()
   const location = useLocation()
   const history = useHistory()
   const showLogin = location.search.includes("showLogin")
+  const showSignUp = location.search.includes("showSignUp")
   return (
-    <Dialog open={showLogin}>
+    <Dialog open={showLogin || showSignUp}>
       <form
         onSubmit={(e) => {
           e.preventDefault()
-          loginInUserMutation({ variables: formState }).then((res) => {
-            const { token } = res.data.tokenAuth
-            localStorage.setItem("token", token)
-            handleClose()
+          let createPromise: Promise<any> = Promise.resolve()
+          if (showSignUp) {
+            createPromise = createUserMutation({ variables: formState })
+          }
+          createPromise.then(() => {
+            loginInUserMutation({ variables: formState }).then((res) => {
+              const { token } = res.data.tokenAuth
+              localStorage.setItem("token", token)
+              handleClose()
+            })
           })
         }}
       >
-        <DialogTitle>Login</DialogTitle>
+        <DialogTitle>{showLogin ? "Login" : "Sign Up"}</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -54,6 +65,11 @@ export default function LoginDialog() {
               setFormState((arg) => ({ ...arg, password: e.target.value }))
             }
           />
+          {showLogin ? (
+            <Link to="?showSignUp">Sign Up</Link>
+          ) : (
+            <Link to="?showLogin">Login</Link>
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

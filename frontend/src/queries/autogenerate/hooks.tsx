@@ -536,6 +536,57 @@ export type GetUserQueryResult = Apollo.QueryResult<
   Types.GetUserQuery,
   Types.GetUserQueryVariables
 >
+export const CreateUserDocument = gql`
+  mutation createUser($username: String!, $password: String!) {
+    createUser(username: $username, password: $password) {
+      user {
+        id
+      }
+    }
+  }
+`
+export type CreateUserMutationFn = Apollo.MutationFunction<
+  Types.CreateUserMutation,
+  Types.CreateUserMutationVariables
+>
+
+/**
+ * __useCreateUserMutation__
+ *
+ * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
+ *   variables: {
+ *      username: // value for 'username'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useCreateUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.CreateUserMutation,
+    Types.CreateUserMutationVariables
+  >,
+) {
+  return Apollo.useMutation<
+    Types.CreateUserMutation,
+    Types.CreateUserMutationVariables
+  >(CreateUserDocument, baseOptions)
+}
+export type CreateUserMutationHookResult = ReturnType<
+  typeof useCreateUserMutation
+>
+export type CreateUserMutationResult = Apollo.MutationResult<Types.CreateUserMutation>
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
+  Types.CreateUserMutation,
+  Types.CreateUserMutationVariables
+>
 export const LoginUserDocument = gql`
   mutation loginUser($username: String!, $password: String!) {
     tokenAuth(username: $username, password: $password) {
