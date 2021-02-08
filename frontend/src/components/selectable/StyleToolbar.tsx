@@ -112,7 +112,6 @@ class StyleToolbar extends React.PureComponent<
               onClick={() => {
                 savePoem().then(() => {
                   this.props.history.push("/")
-                  window.location.reload()
                 })
               }}
               className="toolbar-tab toolbar-tab-lg lower"

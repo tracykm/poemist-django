@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { GetPoemsQuery } from "src/queries/autogenerate/operations"
 import InfiniteScroll from "react-infinite-scroller"
 import Loader from "../universal/Loader"
+import produce from "immer"
 
 export const LoadingPoemDiv = styled.div`
   width: 250px;
@@ -36,7 +37,13 @@ export default function IndexView({
     <PoemContainerDiv>
       <InfiniteScroll
         loadMore={(page) => {
-          return fetchMore({ variables: { offset: 10 * page, limit: 10 } })
+          return fetchMore({
+            variables: { offset: 10 * page, limit: 10 },
+            updateQuery: (prevResult, { fetchMoreResult }) =>
+              produce(prevResult, (draft) => {
+                draft.poemPages.edges.push(...fetchMoreResult.poemPages.edges)
+              }),
+          })
         }}
         hasMore={!(poems.edges.length % 10)}
         loader={<Loader />}
@@ -49,74 +56,3 @@ export default function IndexView({
     </PoemContainerDiv>
   )
 }
-
-// class IndexViewWData extends React.PureComponent<{ userId?: number }> {
-//   render() {
-//     return (
-//       <Query
-//         query={GET_POEMS}
-//         variables={{
-//           offset: 0,
-//           authorId: this.props.userId,
-//         }}
-//         // notifyOnNetworkStatusChange
-//         // fetchPolicy="cache-and-network"
-//       >
-//         {({
-//           error,
-//           data,
-//           loading,
-//           fetchMore,
-//         }: QueryResult<IGetPoemsResponse, {}>) => {
-//           if (loading)
-//             return (
-//               <PoemContainerDiv>
-//                 <div>
-//                   <LoadingPoemDiv />
-//                   <LoadingPoemDiv />
-//                   <LoadingPoemDiv />
-//                   <LoadingPoemDiv />
-//                   <LoadingPoemDiv />
-//                   <LoadingPoemDiv />
-//                 </div>
-//               </PoemContainerDiv>
-//             )
-//           if (error) return <p>Error :(</p>
-//           if (!data) return <p>Empty</p>
-
-//           return (
-//             <IndexView
-//               poems={data.poems.items}
-//               hasMore={data.poems.hasMore}
-//               loadMore={(page) => {
-//                 return fetchMore({
-//                   variables: {
-//                     offset: page * POEM_LIMIT,
-//                   },
-//                   updateQuery: (prev, { fetchMoreResult }) => {
-//                     if (!fetchMoreResult) return prev
-//                     if (
-//                       (last(prev.poems.items) || ({} as any)).id ===
-//                       (last(fetchMoreResult.poems.items) || ({} as any)).id
-//                     ) {
-//                       return prev // getting double called randomly
-//                     }
-//                     return Object.assign({}, prev, {
-//                       poems: {
-//                         ...fetchMoreResult.poems,
-//                         items: [
-//                           ...prev.poems.items,
-//                           ...fetchMoreResult.poems.items,
-//                         ],
-//                       },
-//                     })
-//                   },
-//                 })
-//               }}
-//             />
-//           )
-//         }}
-//       </Query>
-//     )
-//   }
-// }

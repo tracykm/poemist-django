@@ -57,7 +57,7 @@ export const createPoem = gql`
   mutation createPoem($textChunks: [InputTextChunkType]!, $bookId: ID!) {
     createPoem(textChunks: $textChunks, bookId: $bookId) {
       poem {
-        id
+        ...PoemDetails
       }
     }
   }

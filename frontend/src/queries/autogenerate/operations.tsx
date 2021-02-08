@@ -80,9 +80,7 @@ export type CreatePoemMutationVariables = Types.Exact<{
 export type CreatePoemMutation = { __typename?: "Mutation" } & {
   createPoem?: Types.Maybe<
     { __typename?: "CreatePoemMutation" } & {
-      poem?: Types.Maybe<
-        { __typename?: "PoemType" } & Pick<Types.PoemType, "id">
-      >
+      poem?: Types.Maybe<{ __typename?: "PoemType" } & PoemDetailsFragment>
     }
   >
 }

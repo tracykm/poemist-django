@@ -263,10 +263,11 @@ export const CreatePoemDocument = gql`
   mutation createPoem($textChunks: [InputTextChunkType]!, $bookId: ID!) {
     createPoem(textChunks: $textChunks, bookId: $bookId) {
       poem {
-        id
+        ...PoemDetails
       }
     }
   }
+  ${PoemDetailsFragmentDoc}
 `
 export type CreatePoemMutationFn = Apollo.MutationFunction<
   Types.CreatePoemMutation,

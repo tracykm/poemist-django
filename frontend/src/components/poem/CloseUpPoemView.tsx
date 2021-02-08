@@ -14,7 +14,7 @@ export default function CloseUpPoemView() {
   })
   if (!data?.poem) return <Loader />
   return (
-    <CloseUpPoemDiv>
+    <CloseUpPoemDiv style={{ marginTop: 50 }}>
       <Poem poem={data.poem} closeUp />
     </CloseUpPoemDiv>
   )
