@@ -5,6 +5,7 @@ from db.models import Book, Poem
 from django.contrib.auth.models import User
 from graphene_django.debug import DjangoDebug
 import graphql_jwt
+import random
 
 
 class PaginationType(graphene.ObjectType):
@@ -16,6 +17,14 @@ class PomePaginationType(PaginationType):
         gql_type = PoemType
 
     edges = graphene.List(PoemType)
+
+
+class BookPassage(graphene.ObjectType):
+    text = graphene.String()
+    author = graphene.String()
+    title = graphene.String()
+    id = graphene.String()
+    start_idx = graphene.Int()
 
 
 class CreatePoemMutation(graphene.Mutation):
@@ -100,10 +109,19 @@ class Query(graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name="_debug")
     hello = graphene.String(default_value="Hi!")
 
-    random_book = graphene.Field(BookType)
+    random_book = graphene.Field(BookPassage)
 
     def resolve_random_book(parent, info):
-        return Book.objects.order_by("?").first()
+        PASSAGE_LEN = 1000
+        book = Book.objects.order_by("?").first()
+        start_idx = random.randint(0, len(book.text) - PASSAGE_LEN)
+        return {
+            "title": book.title,
+            "author": book.author,
+            "id": book.id,
+            "text": book.text[start_idx : start_idx + PASSAGE_LEN],
+            "start_idx": start_idx,
+        }
 
     poem = graphene.Field(PoemType, id=graphene.ID(required=True))
 
