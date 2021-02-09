@@ -31,14 +31,15 @@ class CreatePoemMutation(graphene.Mutation):
     class Arguments:
         text_chunks = graphene.List(InputTextChunkType)
         book_id = graphene.ID()
+        start_idx = graphene.Int()
 
     # The class attributes define the response of the mutation
     poem = graphene.Field(PoemType)
 
     @classmethod
-    def mutate(cls, root, info, text_chunks, book_id):
+    def mutate(cls, root, info, text_chunks, book_id, start_idx):
         poem = Poem.objects.create(
-            passage="", book_id=book_id, author=info.context.user
+            passage="", book_id=book_id, start_idx=start_idx, author=info.context.user
         )
         poem.save_text_chunks(text_chunks)
         return CreatePoemMutation(poem=poem)

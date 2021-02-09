@@ -14,7 +14,7 @@ import updateCache from "src/utils/updateCache"
 export default function SavePoemButton({ poem, children }) {
   const { data } = useGetCurrentUserQuery()
   const author = data?.current
-  let { id, textChunks, backgroundId, colorRange, book } = poem
+  let { id, textChunks, backgroundId, colorRange, book, startIdx } = poem
   const bookId = book?.id
   if (poem.wordLetters) {
     textChunks = getSelectedTexts(poem.wordLetters)
@@ -33,6 +33,7 @@ export default function SavePoemButton({ poem, children }) {
     variables: {
       textChunks,
       bookId,
+      startIdx,
     },
     update: (cache, arg) => {
       const updateData = (data) => {
@@ -57,8 +58,6 @@ export default function SavePoemButton({ poem, children }) {
   })
 
   return (
-    <div>
-      {children({ savePoem: id ? updatePoemMutation : createPoemMutation })}
-    </div>
+    <>{children({ savePoem: id ? updatePoemMutation : createPoemMutation })}</>
   )
 }

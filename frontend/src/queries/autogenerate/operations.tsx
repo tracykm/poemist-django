@@ -4,7 +4,10 @@ export type GetRandomBookQueryVariables = Types.Exact<{ [key: string]: never }>
 
 export type GetRandomBookQuery = { __typename?: "Query" } & {
   randomBook?: Types.Maybe<
-    { __typename?: "BookType" } & Pick<Types.BookType, "id" | "title" | "text">
+    { __typename?: "BookPassage" } & Pick<
+      Types.BookPassage,
+      "id" | "title" | "text" | "startIdx"
+    >
   >
 }
 
@@ -75,6 +78,7 @@ export type CreatePoemMutationVariables = Types.Exact<{
     | Array<Types.Maybe<Types.InputTextChunkType>>
     | Types.Maybe<Types.InputTextChunkType>
   bookId: Types.Scalars["ID"]
+  startIdx?: Types.Maybe<Types.Scalars["Int"]>
 }>
 
 export type CreatePoemMutation = { __typename?: "Mutation" } & {

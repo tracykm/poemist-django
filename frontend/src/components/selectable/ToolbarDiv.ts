@@ -8,10 +8,12 @@ const ToolbarDiv = styled.div`
   top: 18rem;
   width: 170px;
   @media (max-width: ${sizes.tablet}) {
-    width: ${sizes.poemWidth * 2}px;
-    left: calc(50vw - 250px);
+    width: 100vw;
+    left: 0;
     bottom: 0;
     top: auto;
+    z-index: 10;
+    display: flex;
     z-index: 10;
     .toolbar-tab {
       display: inline-block;

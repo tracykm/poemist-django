@@ -6,6 +6,7 @@ export const getRandomBook = gql`
       id
       title
       text
+      startIdx
     }
   }
 `

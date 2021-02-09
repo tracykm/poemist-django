@@ -114,6 +114,7 @@ export default function WriteViewWData() {
       id: randomBook.data.randomBook.id,
       title: randomBook.data.randomBook.title,
     },
+    startIdx: randomBook.data.randomBook.startIdx,
     author: { id: data?.current.id || "1", username: "" },
     ...getSelectable({
       textChunks: data?.poem.textChunks || [

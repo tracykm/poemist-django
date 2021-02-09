@@ -31,7 +31,7 @@ export type Query = {
   __typename?: "Query"
   _debug?: Maybe<DjangoDebug>
   hello?: Maybe<Scalars["String"]>
-  randomBook?: Maybe<BookType>
+  randomBook?: Maybe<BookPassage>
   poem?: Maybe<PoemType>
   user?: Maybe<UserType>
   poems?: Maybe<Array<Maybe<PoemType>>>
@@ -98,14 +98,13 @@ export type DjangoDebugSql = {
   encoding?: Maybe<Scalars["String"]>
 }
 
-export type BookType = {
-  __typename?: "BookType"
-  id: Scalars["ID"]
-  createdAt: Scalars["DateTime"]
-  updatedAt: Scalars["DateTime"]
-  author: Scalars["String"]
-  title: Scalars["String"]
-  text: Scalars["String"]
+export type BookPassage = {
+  __typename?: "BookPassage"
+  text?: Maybe<Scalars["String"]>
+  author?: Maybe<Scalars["String"]>
+  title?: Maybe<Scalars["String"]>
+  id?: Maybe<Scalars["String"]>
+  startIdx?: Maybe<Scalars["Int"]>
 }
 
 export type PoemType = {
@@ -119,6 +118,16 @@ export type PoemType = {
   colorRange: Scalars["Int"]
   backgroundId: Scalars["Int"]
   textChunks?: Maybe<Array<Maybe<TextChunkType>>>
+}
+
+export type BookType = {
+  __typename?: "BookType"
+  id: Scalars["ID"]
+  createdAt: Scalars["DateTime"]
+  updatedAt: Scalars["DateTime"]
+  author: Scalars["String"]
+  title: Scalars["String"]
+  text: Scalars["String"]
 }
 
 export type UserType = {
@@ -158,6 +167,7 @@ export type Mutation = {
 
 export type MutationCreatePoemArgs = {
   bookId?: Maybe<Scalars["ID"]>
+  startIdx?: Maybe<Scalars["Int"]>
   textChunks?: Maybe<Array<Maybe<InputTextChunkType>>>
 }
 

@@ -29,6 +29,7 @@ export const GetRandomBookDocument = gql`
       id
       title
       text
+      startIdx
     }
   }
 `
@@ -260,8 +261,12 @@ export type GetPoemsByAuthorQueryResult = Apollo.QueryResult<
   Types.GetPoemsByAuthorQueryVariables
 >
 export const CreatePoemDocument = gql`
-  mutation createPoem($textChunks: [InputTextChunkType]!, $bookId: ID!) {
-    createPoem(textChunks: $textChunks, bookId: $bookId) {
+  mutation createPoem(
+    $textChunks: [InputTextChunkType]!
+    $bookId: ID!
+    $startIdx: Int
+  ) {
+    createPoem(textChunks: $textChunks, bookId: $bookId, startIdx: $startIdx) {
       poem {
         ...PoemDetails
       }
@@ -289,6 +294,7 @@ export type CreatePoemMutationFn = Apollo.MutationFunction<
  *   variables: {
  *      textChunks: // value for 'textChunks'
  *      bookId: // value for 'bookId'
+ *      startIdx: // value for 'startIdx'
  *   },
  * });
  */
