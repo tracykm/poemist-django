@@ -8,6 +8,7 @@ import { HashRouter as Router } from "react-router-dom"
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 import { ApolloProvider } from "@apollo/client"
+import { ErrorBoundary } from "./components/universal/ErrorBoundary"
 
 const DEV_API = "http://localhost:8000/graphql"
 const STAGING_API = "https://calm-lowlands-48993.herokuapp.com/graphql"
@@ -35,11 +36,13 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <Router>
-        <App />
-      </Router>
-    </ApolloProvider>
+    <ErrorBoundary>
+      <ApolloProvider client={client}>
+        <Router>
+          <App />
+        </Router>
+      </ApolloProvider>
+    </ErrorBoundary>
   </React.StrictMode>,
   document.getElementById("root"),
 )

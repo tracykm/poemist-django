@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { sizes } from "src/components/universal/_variables"
 import Navbar from "src/components/fullApp/Navbar"
+import { ErrorBoundary } from "../universal/ErrorBoundary"
 // import ModalContainer from "src/components/login/ModalContainer"
 // import 'reset-css/reset.css'
 
@@ -52,7 +53,9 @@ export default function AppWrapper({ children }) {
   return (
     <AppDiv>
       <Navbar />
-      <div className="page-body">{children}</div>
+      <ErrorBoundary>
+        <div className="page-body">{children}</div>
+      </ErrorBoundary>
 
       {/* <ModalContainer /> */}
     </AppDiv>

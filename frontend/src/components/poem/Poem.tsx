@@ -5,6 +5,7 @@ import PoemFooter from "./PoemFooter"
 import PoemDiv from "src/components/poem/PoemDiv"
 import Loader from "../universal/Loader"
 import { IPoem } from "../types"
+import { ErrorBoundary } from "../universal/ErrorBoundary"
 
 export default function Poem(props: { poem: IPoem; closeUp?: boolean }) {
   const { poem } = props
@@ -19,17 +20,19 @@ export default function Poem(props: { poem: IPoem; closeUp?: boolean }) {
   if (!author.id) return null
 
   return (
-    <PoemDiv
-      className={`poem style-${backgroundId} color-${colorRange} ${
-        props.closeUp ? "close-up" : ""
-      }`}
-      data-test={`poem${id}`}
-      data-cy="poem"
-    >
-      <div className="background-img" />
-      <PoemHeader poemId={id} authorId={author.id} />
-      <PoemBody textChunks={textChunks} />
-      <PoemFooter authorUsername={author.username} authorId={author.id} />
-    </PoemDiv>
+    <ErrorBoundary>
+      <PoemDiv
+        className={`poem style-${backgroundId} color-${colorRange} ${
+          props.closeUp ? "close-up" : ""
+        }`}
+        data-test={`poem${id}`}
+        data-cy="poem"
+      >
+        <div className="background-img" />
+        <PoemHeader poemId={id} authorId={author.id} />
+        <PoemBody textChunks={textChunks} />
+        <PoemFooter authorUsername={author.username} authorId={author.id} />
+      </PoemDiv>
+    </ErrorBoundary>
   )
 }
