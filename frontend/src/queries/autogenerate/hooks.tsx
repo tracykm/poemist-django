@@ -86,9 +86,6 @@ export const GetSinglePoemDocument = gql`
     poem(id: $id) {
       ...PoemDetails
     }
-    current {
-      id
-    }
   }
   ${PoemDetailsFragmentDoc}
 `
@@ -492,9 +489,6 @@ export const GetUserDocument = gql`
       username
       poemsWrittenCount
       dateJoined
-    }
-    current {
-      id
     }
   }
 `

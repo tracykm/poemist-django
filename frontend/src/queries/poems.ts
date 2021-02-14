@@ -27,9 +27,6 @@ export const getSinglePoem = gql`
     poem(id: $id) {
       ...PoemDetails
     }
-    current {
-      id
-    }
   }
 `
 

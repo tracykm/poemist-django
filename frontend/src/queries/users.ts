@@ -17,9 +17,6 @@ export const getUser = gql`
       poemsWrittenCount
       dateJoined
     }
-    current {
-      id
-    }
   }
 `
 

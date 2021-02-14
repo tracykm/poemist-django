@@ -1,5 +1,6 @@
-import produce from "immer"
 import React from "react"
+import produce from "immer"
+import { useHistory } from "react-router-dom"
 import {
   useUpdatePoemMutation,
   useCreatePoemMutation,
@@ -12,6 +13,7 @@ import getSelectedTexts from "src/utils/getSelectedTexts"
 import updateCache from "src/utils/updateCache"
 
 export default function SavePoemButton({ poem, children }) {
+  const history = useHistory()
   const { data } = useGetCurrentUserQuery()
   const author = data?.current
   let { id, textChunks, backgroundId, colorRange, book, startIdx } = poem
@@ -57,7 +59,13 @@ export default function SavePoemButton({ poem, children }) {
     },
   })
 
-  return (
-    <>{children({ savePoem: id ? updatePoemMutation : createPoemMutation })}</>
-  )
+  let savePoem = id ? updatePoemMutation : createPoemMutation
+  if (!author) {
+    savePoem = () => {
+      history.push("?showSignUp=true")
+      return Promise.reject()
+    }
+  }
+
+  return <>{children({ savePoem })}</>
 }

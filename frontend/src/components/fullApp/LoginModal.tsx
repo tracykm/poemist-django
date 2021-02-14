@@ -11,18 +11,23 @@ import { Link, useHistory, useLocation } from "react-router-dom"
 import {
   useLoginUserMutation,
   useCreateUserMutation,
+  GetCurrentUserDocument,
 } from "src/queries/autogenerate/hooks"
 
 export default function LoginDialog() {
-  const handleClose = () => history.push("/")
   const [formState, setFormState] = useState({
     username: "tracy",
     password: "password",
   })
-  const [loginInUserMutation] = useLoginUserMutation()
-  const [createUserMutation] = useCreateUserMutation()
+  const [loginInUserMutation] = useLoginUserMutation({
+    refetchQueries: [{ query: GetCurrentUserDocument }],
+  })
+  const [createUserMutation] = useCreateUserMutation({
+    refetchQueries: [{ query: GetCurrentUserDocument }],
+  })
   const location = useLocation()
   const history = useHistory()
+  const handleClose = () => history.push(history.location.pathname)
   const showLogin = location.search.includes("showLogin")
   const showSignUp = location.search.includes("showSignUp")
   return (
@@ -38,6 +43,10 @@ export default function LoginDialog() {
             loginInUserMutation({ variables: formState }).then((res) => {
               const { token } = res.data.tokenAuth
               localStorage.setItem("token", token)
+              // TODO - hack to get the "refetchQueries" to trigger after the localStorage.setItem
+              window.setTimeout(() => {
+                loginInUserMutation({ variables: formState })
+              }, 100)
               handleClose()
             })
           })

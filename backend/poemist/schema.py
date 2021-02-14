@@ -163,7 +163,10 @@ class Query(graphene.ObjectType):
     current = graphene.Field(UserType)
 
     def resolve_current(parent, info):
-        return info.context.user
+        if info.context.user.username:
+            return info.context.user
+        else:
+            return None
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

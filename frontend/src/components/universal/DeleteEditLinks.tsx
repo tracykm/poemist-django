@@ -13,7 +13,7 @@ import updateCache from "src/utils/updateCache"
 
 export default function DeleteEditLinks({ authorId, poemId }) {
   const { data } = useGetCurrentUserQuery()
-  const isCurrentUser = data?.current.id === authorId
+  const isCurrentUser = data?.current?.id === authorId
   const [deletePoem] = useDeletePoemMutation({
     variables: { id: poemId },
     update: (cache, arg) => {

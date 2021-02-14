@@ -5,14 +5,17 @@ import Loader from "../universal/Loader"
 import {
   useGetUserQuery,
   useGetPoemsByAuthorQuery,
+  useGetCurrentUserQuery,
 } from "src/queries/autogenerate/hooks"
 import { useParams } from "react-router-dom"
 
 const ProfileHeader = ({ id }) => {
   const { data } = useGetUserQuery({ variables: { id } })
+  const currentUserRes = useGetCurrentUserQuery()
+  const currentUserId = currentUserRes.data?.current?.id
   if (!data) return <Loader />
-  const { current, user } = data
-  const isCurrentUser = current?.id === user.id
+  const { user } = data
+  const isCurrentUser = currentUserId === user.id
   const pronoun = isCurrentUser ? "you" : "they"
   const poemsWrittenCount = user && user.poemsWrittenCount
   const dateJoined = user && moment(user.dateJoined).fromNow()

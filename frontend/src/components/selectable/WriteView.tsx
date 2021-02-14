@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom"
 import {
   useGetSinglePoemQuery,
   useGetRandomBookQuery,
+  useGetCurrentUserQuery,
 } from "src/queries/autogenerate/hooks"
 
 function getSelectable(poem: {
@@ -108,6 +109,8 @@ export default function WriteViewWData() {
   const { id } = useParams<{ id: string }>()
   const { data } = useGetSinglePoemQuery({ variables: { id }, skip: !id })
   const randomBook = useGetRandomBookQuery()
+  const currentUserRes = useGetCurrentUserQuery()
+  const current = currentUserRes.data?.current
   if (!randomBook.data) return <Loader />
   const selectablePoem = {
     book: {
@@ -115,7 +118,7 @@ export default function WriteViewWData() {
       title: randomBook.data.randomBook.title,
     },
     startIdx: randomBook.data.randomBook.startIdx,
-    author: { id: data?.current.id || "1", username: "" },
+    author: current,
     ...getSelectable({
       textChunks: data?.poem.textChunks || [
         { text: randomBook.data.randomBook.text, isSelected: false },

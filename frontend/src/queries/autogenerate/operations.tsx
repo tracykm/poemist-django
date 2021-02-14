@@ -37,9 +37,6 @@ export type GetSinglePoemQueryVariables = Types.Exact<{
 
 export type GetSinglePoemQuery = { __typename?: "Query" } & {
   poem?: Types.Maybe<{ __typename?: "PoemType" } & PoemDetailsFragment>
-  current?: Types.Maybe<
-    { __typename?: "UserType" } & Pick<Types.UserType, "id">
-  >
 }
 
 export type GetPoemsQueryVariables = Types.Exact<{
@@ -134,9 +131,6 @@ export type GetUserQuery = { __typename?: "Query" } & {
       Types.UserType,
       "id" | "username" | "poemsWrittenCount" | "dateJoined"
     >
-  >
-  current?: Types.Maybe<
-    { __typename?: "UserType" } & Pick<Types.UserType, "id">
   >
 }
 
