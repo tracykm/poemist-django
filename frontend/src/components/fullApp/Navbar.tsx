@@ -2,10 +2,11 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 import PoemistLogo from "src/components/fullApp/Logo"
 import NavbarDiv from "./NavbarDiv"
-import { Select, MenuItem } from "@material-ui/core"
 import { useHistory } from "react-router-dom"
 import { useGetCurrentUserQuery } from "src/queries/autogenerate/hooks"
 import LoginModal from "./LoginModal"
+import Dropdown from "../universal/Dropdown"
+import { FaAngleDown } from "react-icons/fa"
 
 const LogInOut = ({ toggleShowLogin }: { toggleShowLogin: () => void }) => (
   <span>
@@ -43,27 +44,34 @@ function Navbar() {
         </li>
         {currentUser && (
           <li>
-            <NavLink
-              activeClassName="active"
-              to={`/user/${currentUser.id}`}
-              data-test="profileLink"
-            >
-              Profile
-            </NavLink>
-
-            <Select labelId="demo-simple-select-label" id="demo-simple-select">
-              <MenuItem onClick={() => history.push(`/user/${currentUser.id}`)}>
-                {currentUser.username}
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  localStorage.clear()
-                  window.location.reload()
-                }}
+            <span style={{ display: "flex" }}>
+              <NavLink
+                activeClassName="active"
+                to={`/user/${currentUser.id}`}
+                data-test="profileLink"
               >
-                Logout
-              </MenuItem>
-            </Select>
+                Profile
+              </NavLink>
+
+              <Dropdown
+                openLabel={<FaAngleDown />}
+                openStyle={{
+                  color: "white",
+                  display: "inline",
+                  minWidth: 5,
+                  paddingTop: 0,
+                }}
+                items={[
+                  {
+                    label: "Logout",
+                    onClick: () => {
+                      localStorage.clear()
+                      window.location.reload()
+                    },
+                  },
+                ]}
+              />
+            </span>
           </li>
         )}
 

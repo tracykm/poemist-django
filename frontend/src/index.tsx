@@ -10,6 +10,9 @@ import { setContext } from "@apollo/client/link/context"
 import { ApolloProvider } from "@apollo/client"
 import { ErrorBoundary } from "./components/universal/ErrorBoundary"
 
+import CssBaseline from "@material-ui/core/CssBaseline"
+import { createMuiTheme, ThemeProvider } from "@material-ui/core"
+
 const DEV_API = "http://localhost:8000/graphql"
 const STAGING_API = "https://calm-lowlands-48993.herokuapp.com/graphql"
 
@@ -34,12 +37,36 @@ const client = new ApolloClient({
   cache: new InMemoryCache({}),
 })
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#515485",
+    },
+  },
+  props: {
+    MuiButtonBase: {
+      disableRipple: true,
+    },
+  },
+  shape: {
+    borderRadius: 0,
+  },
+  typography: {
+    button: {
+      textTransform: "none",
+    },
+  },
+})
+
 ReactDOM.render(
   <React.StrictMode>
     <ErrorBoundary>
       <ApolloProvider client={client}>
         <Router>
-          <App />
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <App />
+          </ThemeProvider>
         </Router>
       </ApolloProvider>
     </ErrorBoundary>

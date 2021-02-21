@@ -5,6 +5,7 @@ import PoemDiv, { BodyDiv } from "src/components/poem/PoemDiv"
 import { IWordLetter } from "../types"
 
 const SelectablePoemDiv = styled.div`
+  user-select: none;
   .letter {
     cursor: pointer;
   }

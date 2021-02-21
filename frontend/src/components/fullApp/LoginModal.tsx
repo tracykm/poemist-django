@@ -6,6 +6,8 @@ import {
   Button,
   TextField,
   Typography,
+  Link as MuiLink,
+  IconButton,
 } from "@material-ui/core"
 import React, { useState } from "react"
 import { Link, useHistory, useLocation } from "react-router-dom"
@@ -14,6 +16,7 @@ import {
   useCreateUserMutation,
   GetCurrentUserDocument,
 } from "src/queries/autogenerate/hooks"
+import { FaTimes } from "react-icons/fa"
 
 export default function LoginDialog() {
   const [formState, setFormState] = useState({
@@ -33,7 +36,7 @@ export default function LoginDialog() {
   const showLogin = location.search.includes("showLogin")
   const showSignUp = location.search.includes("showSignUp")
   return (
-    <Dialog open={showLogin || showSignUp}>
+    <Dialog open={showLogin || showSignUp} onClose={handleClose}>
       <form
         onSubmit={(e) => {
           e.preventDefault()
@@ -60,7 +63,14 @@ export default function LoginDialog() {
             })
         }}
       >
-        <DialogTitle>{showLogin ? "Login" : "Sign Up"}</DialogTitle>
+        <DialogTitle>
+          <div style={{ display: "flex" }}>
+            <div style={{ flexGrow: 1 }}>{showLogin ? "Login" : "Sign Up"}</div>
+            <IconButton size="small" onClick={handleClose}>
+              <FaTimes />
+            </IconButton>
+          </div>
+        </DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -83,9 +93,13 @@ export default function LoginDialog() {
             }
           />
           {showLogin ? (
-            <Link to="?showSignUp">Sign Up</Link>
+            <Link to="?showSignUp" component={MuiLink}>
+              Sign Up
+            </Link>
           ) : (
-            <Link to="?showLogin">Login</Link>
+            <Link to="?showLogin" component={MuiLink}>
+              Login
+            </Link>
           )}
           <Typography color="error">
             {signUpError?.message?.includes("UNIQUE")
@@ -95,10 +109,8 @@ export default function LoginDialog() {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button color="primary" type="submit">
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button color="primary" variant="contained" type="submit">
             Submit
           </Button>
         </DialogActions>

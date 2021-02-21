@@ -41,6 +41,27 @@ class WriteView extends React.PureComponent<IProps> {
     return state
   }
 
+  onKeyDown = (e) => {
+    if (e.key === "Shift") {
+      this.setState({ isSelectingByWord: false })
+    }
+  }
+  onKeyUp = (e) => {
+    debugger
+    if (e.key === "Shift") {
+      this.setState({ isSelectingByWord: true })
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener("keydown", this.onKeyDown, false)
+    document.addEventListener("keyup", this.onKeyUp, false)
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.onKeyDown, false)
+    document.removeEventListener("keyup", this.onKeyUp, false)
+  }
+
   handleClickLetter: IHandleClickLetter = ({ wordIdx, letterIdx }) => {
     const { wordLetters, isSelectingByWord } = this.state
     const newWordLetters = toggleLetters({
