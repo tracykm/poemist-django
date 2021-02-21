@@ -5,9 +5,10 @@ import { GetPoemsQuery } from "src/queries/autogenerate/operations"
 import InfiniteScroll from "react-infinite-scroller"
 import Loader from "../universal/Loader"
 import produce from "immer"
+import { sizes } from "../universal/_variables"
 
 export const LoadingPoemDiv = styled.div`
-  width: 250px;
+  width: ${sizes.poemWidth}px;
   height: 450px;
   margin: 16px;
   background: #ddd;
@@ -17,7 +18,7 @@ export const LoadingPoemDiv = styled.div`
 export const PoemContainerDiv = styled.div`
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(${sizes.poemWidth}px, 1fr));
   grid-gap: 10px;
   > div {
     text-align: center;

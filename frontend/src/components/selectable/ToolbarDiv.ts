@@ -4,7 +4,7 @@ import { sizes, color } from "src/components/universal/_variables"
 const ToolbarDiv = styled.div`
   text-align: left;
   position: fixed;
-  left: calc(50vw + 250px);
+  left: calc(50vw + ${sizes.poemWidth}px);
   top: 18rem;
   width: 170px;
   @media (max-width: ${sizes.tablet}) {

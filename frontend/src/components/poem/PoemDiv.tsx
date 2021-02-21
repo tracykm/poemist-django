@@ -3,17 +3,19 @@ import { sizes, color } from "src/components/universal/_variables"
 import paperTextureImg from "src/images/paper-rect-contrast.jpg"
 import treeBarkImg from "src/images/tree-bark.jpg"
 import circlePatternImg from "src/images/contemporary_china_small.png"
-import oldPaperImg from "src/images/4345189-xs.jpg"
 import f0c4457 from "src/images/f0c4457.jpg"
 import maxresdefault from "src/images/maxresdefault.jpg"
 import blueTile from "src/images/blueTile.jpg"
 import tile from "src/images/life_original_wild_urban_shells_abstract_texture_love-572258.jpg"
-import paintingCracks from "src/images/painting-cracks.jpg"
+import paintingCracks from "src/images/paintingCracks.jpg"
 import Alcala_lg from "src/images/Alcala_lg.jpg"
 import map from "src/images/map2.jpg"
-import blue from "src/images/blue.jpg"
+import paperInverted from "src/images/paperInverted.jpg"
+import paperContrast from "src/images/paperContrast.jpg"
 import triangles123 from "src/images/triangles-123.jpg"
 import mU0yXR99Bg91S1ACSyPq_w from "src/images/1_mU0yXR99Bg91S1ACSyPq_w.jpg"
+import waves from "src/images/waves.jpg"
+import electronic from "src/images/electronic.jpg"
 
 // @for $i from 1 through 36 {
 //   .color-#{$i} {
@@ -110,7 +112,7 @@ const PoemDiv = styled.div`
 
   &.style-1 {
     .background-img {
-      filter: contrast(1.2);
+      background: url(${paperContrast});
     }
     .not-selected {
       color: rgba(0, 0, 0, 0.1);
@@ -124,7 +126,7 @@ const PoemDiv = styled.div`
 
   &.style-2 {
     .background-img {
-      filter: contrast(1.2);
+      background: url(${paperContrast});
     }
     .not-selected {
       opacity: 0;
@@ -136,7 +138,7 @@ const PoemDiv = styled.div`
 
   &.style-3 {
     .background-img {
-      filter: invert(100%);
+      background: url(${paperInverted});
     }
     .not-selected {
       opacity: .2;
@@ -252,12 +254,12 @@ const PoemDiv = styled.div`
 
   &.style-11 {
     .background-img {
-      background: url(${oldPaperImg});
-      background-size: 100%;
-      opacity: .5;
+      background: url(${waves});
+      background-size: 50%;
+
     }
     .is-selected {
-      background: #000068;
+      background: #100000;
       color: #cccbbf;
       padding: ${sizes.spaceSm}px ${sizes.spaceBase}px;
       margin: ${-sizes.spaceBase}px;
@@ -311,8 +313,8 @@ const PoemDiv = styled.div`
       color: rgba(0, 0, 0, 0);
     }
     .is-selected {
-      background: #8f1660;
-      color: #ebe8ce;
+      background: #37517a;
+      color: white;
       padding: ${sizes.spaceSm}px ${sizes.spaceBase}px;
       margin: ${-sizes.spaceBase}px;
     }
@@ -321,7 +323,6 @@ const PoemDiv = styled.div`
   &.style-15 {
     .background-img {
       background: url(${tile});
-      filter: darken(6);
       background-size: 100%;
     }
     .is-selected {
@@ -400,8 +401,8 @@ const PoemDiv = styled.div`
 
   &.style-20 {
   .background-img {
-    background: url(${blue});
-    background-size: 8%;
+    background: url(${electronic});
+    background-size: 100%;
   }
   .not-selected {
     color: rgba(0, 0, 0, 0);
