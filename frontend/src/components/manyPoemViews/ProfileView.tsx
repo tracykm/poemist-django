@@ -1,4 +1,3 @@
-import React from "react"
 import moment from "moment"
 import IndexView from "src/components/manyPoemViews/IndexView"
 import Loader from "../universal/Loader"

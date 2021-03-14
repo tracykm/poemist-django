@@ -1,4 +1,3 @@
-import React from "react"
 import { BodyDiv } from "src/components/poem/PoemDiv"
 import { TextChunkType } from "src/queries/autogenerate/schemas"
 

@@ -1,4 +1,4 @@
-import React from "react"
+import { PureComponent } from "react"
 import formatLetters from "src/utils/formatLetters"
 import toggleLetters from "src/utils/toggleLetters"
 import WriterToolbar from "src/components/selectable/WriterToolbar"
@@ -28,7 +28,7 @@ interface IProps {
   selectablePoem: ISelectablePoem
 }
 
-class WriteView extends React.PureComponent<IProps> {
+class WriteView extends PureComponent<IProps> {
   state = this.props.selectablePoem
 
   static getDerivedStateFromProps(
@@ -47,7 +47,6 @@ class WriteView extends React.PureComponent<IProps> {
     }
   }
   onKeyUp = (e) => {
-    debugger
     if (e.key === "Shift") {
       this.setState({ isSelectingByWord: true })
     }

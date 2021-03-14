@@ -1,9 +1,6 @@
-import React from "react"
+import { PureComponent } from "react"
 
-export class ErrorBoundary extends React.PureComponent<
-  {},
-  { hasError: boolean }
-> {
+export class ErrorBoundary extends PureComponent<{}, { hasError: boolean }> {
   constructor(props) {
     super(props)
     this.state = { hasError: false }

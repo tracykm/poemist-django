@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import { sizes } from "src/components/universal/_variables"
 import Navbar from "src/components/fullApp/Navbar"

@@ -1,4 +1,3 @@
-import React from "react"
 import { withRouter, RouteComponentProps } from "react-router-dom"
 import {
   FaAngleRight,
@@ -9,6 +8,7 @@ import {
 import SavePoemButton from "./SavePoemButton"
 import ToolbarDiv from "./ToolbarDiv"
 import { GetSinglePoemQuery } from "src/queries/autogenerate/operations"
+import { PureComponent } from "react"
 
 const BACKGROUND_ID_COUNT = 20
 const COLOR_RANGE_COUNT = 36
@@ -28,7 +28,7 @@ interface IProps {
   updateStyle: (arg: { backgroundId?: number; colorRange?: number }) => void
 }
 
-class StyleToolbar extends React.PureComponent<
+class StyleToolbar extends PureComponent<
   IProps & RouteComponentProps<{ id: string }>
 > {
   backgroundUp = () => {

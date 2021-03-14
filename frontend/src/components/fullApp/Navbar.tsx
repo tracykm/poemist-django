@@ -1,4 +1,3 @@
-import React from "react"
 import { NavLink } from "react-router-dom"
 import PoemistLogo from "src/components/fullApp/Logo"
 import NavbarDiv from "./NavbarDiv"
@@ -10,6 +9,7 @@ import { FaAngleDown } from "react-icons/fa"
 
 const LogInOut = ({ toggleShowLogin }: { toggleShowLogin: () => void }) => (
   <span>
+    {/* eslint-disable-next-line */}
     <a onClick={toggleShowLogin} data-test="signUpLink">
       Sign Up
     </a>

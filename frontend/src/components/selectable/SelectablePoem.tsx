@@ -1,4 +1,3 @@
-import React from "react"
 import Word, { IHandleClickLetter } from "./Word"
 import styled from "styled-components"
 import PoemDiv, { BodyDiv } from "src/components/poem/PoemDiv"

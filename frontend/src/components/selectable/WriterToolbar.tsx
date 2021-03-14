@@ -1,4 +1,3 @@
-import React from "react"
 import { FaArrowRight } from "react-icons/fa"
 import SavePoemButton from "./SavePoemButton"
 import ToolbarDiv from "./ToolbarDiv"

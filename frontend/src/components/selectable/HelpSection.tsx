@@ -1,6 +1,6 @@
-import React from "react"
+import { PureComponent } from "react"
 
-class HelpSection extends React.PureComponent<{}> {
+class HelpSection extends PureComponent<{}> {
   state = {
     showHelp: !localStorage.getItem("returningUser"),
   }

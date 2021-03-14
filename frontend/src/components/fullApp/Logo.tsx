@@ -1,5 +1,3 @@
-import React from "react"
-
 const PoemistLogo = () => (
   <svg viewBox="0 0 380.5 128.1" style={{ minWidth: "5rem" }}>
     <path

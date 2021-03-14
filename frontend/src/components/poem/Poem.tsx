@@ -1,4 +1,3 @@
-import React from "react"
 import PoemHeader from "./PoemHeader"
 import PoemBody from "./PoemBody"
 import PoemFooter from "./PoemFooter"

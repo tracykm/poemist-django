@@ -1,4 +1,3 @@
-import React from "react"
 import DeleteEditLinks from "src/components/universal/DeleteEditLinks"
 import { Link } from "react-router-dom"
 import styled from "styled-components"

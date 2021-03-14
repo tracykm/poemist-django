@@ -1,4 +1,3 @@
-import React from "react"
 import { IWordLetter } from "../types"
 
 export type IHandleClickLetter = ({

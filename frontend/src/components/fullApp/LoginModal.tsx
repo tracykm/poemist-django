@@ -20,8 +20,8 @@ import { FaTimes } from "react-icons/fa"
 
 export default function LoginDialog() {
   const [formState, setFormState] = useState({
-    username: "tracy",
-    password: "password",
+    username: "",
+    password: "",
   })
   const [loginInUserMutation, { error: loginError }] = useLoginUserMutation({
     refetchQueries: [{ query: GetCurrentUserDocument }],

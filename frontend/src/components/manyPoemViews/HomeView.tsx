@@ -1,4 +1,3 @@
-import React from "react"
 import IndexView from "src/components/manyPoemViews/IndexView"
 import { useGetPoemsQuery } from "src/queries/autogenerate/hooks"
 import Loader from "../universal/Loader"

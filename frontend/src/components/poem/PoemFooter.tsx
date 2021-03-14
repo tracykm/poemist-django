@@ -1,4 +1,3 @@
-import React from "react"
 import UsernameLink from "src/components/universal/UsernameLink"
 
 export default function PoemFooter({

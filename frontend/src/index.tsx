@@ -1,4 +1,4 @@
-import React from "react"
+import { StrictMode } from "react"
 import ReactDOM from "react-dom"
 import "./index.css"
 import App from "./App"
@@ -40,7 +40,7 @@ const client = new ApolloClient({
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#515485",
+      main: "#333",
     },
   },
   props: {
@@ -59,7 +59,7 @@ const theme = createMuiTheme({
 })
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <ErrorBoundary>
       <ApolloProvider client={client}>
         <Router>
@@ -70,7 +70,7 @@ ReactDOM.render(
         </Router>
       </ApolloProvider>
     </ErrorBoundary>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById("root"),
 )
 

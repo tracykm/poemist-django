@@ -1,4 +1,3 @@
-import React from "react"
 import Poem from "src/components/poem/Poem"
 import CloseUpPoemDiv from "src/components/poem/CloseUpPoemDiv"
 import Loader from "../universal/Loader"

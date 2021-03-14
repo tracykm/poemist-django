@@ -1,4 +1,4 @@
-import React from "react"
+import { useState } from "react"
 import { Button, ButtonProps, Menu, MenuItem } from "@material-ui/core"
 
 export default function Dropdown({
@@ -10,7 +10,7 @@ export default function Dropdown({
   items: { label: string; onClick?: () => void }[]
   openStyle: ButtonProps["style"]
 }) {
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [anchorEl, setAnchorEl] = useState(null)
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)

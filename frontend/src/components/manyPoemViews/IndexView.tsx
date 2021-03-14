@@ -1,4 +1,3 @@
-import React from "react"
 import Poem from "src/components/poem/Poem"
 import styled from "styled-components"
 import { GetPoemsQuery } from "src/queries/autogenerate/operations"
