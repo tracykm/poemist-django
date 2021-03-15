@@ -1,7 +1,10 @@
 name: bundleSize
 on: [push]
+defaults:
+  run:
+    working-directory: frontend
 jobs:
-  check-bats-version:
+  check-bundle-size:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -10,4 +13,3 @@ jobs:
           bootstrap: yarn
           build_command: yarn build
           dist_path: frontend/build
-          token: ${{ secrets.GITHUB_TOKEN }}
