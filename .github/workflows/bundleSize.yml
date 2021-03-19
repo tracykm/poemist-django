@@ -12,4 +12,5 @@ jobs:
         with:
           bootstrap: yarn
           build_command: yarn build
-          dist_path: frontend/build
+          dist_path: build
+          working-directory: frontend
