@@ -1,6 +1,6 @@
-name: backend checks
+name: python-typecheck
 on:
-  pull_request:
+  push:
     paths:
       - "backend/**"
 jobs:
