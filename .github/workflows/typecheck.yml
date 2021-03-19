@@ -1,6 +1,5 @@
-uses: jpetrucciani/mypy-check@master
-
-# or specify a path!
+name: python-typecheck
+on: [push]
 uses: jpetrucciani/mypy-check@master
 with:
-  path: 'backend'
+  path: "backend"
