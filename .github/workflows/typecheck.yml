@@ -15,7 +15,7 @@ jobs:
       - name: Install PyRight
         run: npm i pyright
       - name: Install Dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r backend/requirements.txt
       - name: Typecheck
         run: node_modules/pyright/index.js
       - name: Run black --check .
