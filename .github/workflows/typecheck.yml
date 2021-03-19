@@ -13,10 +13,10 @@ jobs:
         with:
           python-version: 3.9
       - name: Install PyRight
-        run: npm i pyright -g
+        run: npm i pyright
       - name: Install Dependencies
         run: pip install -r requirements.txt
       - name: Typecheck
-        run: pyright
+        run: node_modules/pyright/index.js
       - name: Run black --check .
         run: black --check --exclude db/migrations .

@@ -21,7 +21,6 @@ class SelectedTextDict(TypedDict):
     start_idx: int
     end_idx: int
 
-
 class Poem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
