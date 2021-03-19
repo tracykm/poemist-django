@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - /≥uses: sarthak-saxena/JSBundleSize@master
+      - uses: sarthak-saxena/JSBundleSize@master
         with:
           bootstrap: yarn
           build_command: yarn build
