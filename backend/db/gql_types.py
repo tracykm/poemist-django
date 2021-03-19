@@ -18,8 +18,8 @@ class UserType(DjangoObjectType):
 
     poems_written_count = graphene.Int()
 
-    def resolve_poems_written_count(parent, info):
-        return parent.poems.count()
+    def resolve_poems_written_count(self, info):
+        return self.poems.count()
 
 
 class BookType(DjangoObjectType):
@@ -61,12 +61,12 @@ class PoemType(DjangoObjectType):
 
     text_chunks = graphene.List(TextChunkType)
 
-    def resolve_text_chunks(parent, info):
-        return info.context.ctx.selected_texts_loader.load(parent.id).then(
-            lambda selected_texts: parent.text_chunks(selected_texts)
+    def resolve_text_chunks(self, info):
+        return info.context.ctx.selected_texts_loader.load(self.id).then(
+            lambda selected_texts: self.text_chunks(selected_texts)
         )
 
     author = graphene.Field(lambda: UserType)
 
-    def resolve_author(parent, info):
-        return info.context.ctx.user_loader.load(parent.author_id)
+    def resolve_author(self, info):
+        return info.context.ctx.user_loader.load(self.author_id)

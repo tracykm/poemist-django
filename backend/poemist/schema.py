@@ -112,7 +112,7 @@ class Query(graphene.ObjectType):
 
     random_book = graphene.Field(BookPassage)
 
-    def resolve_random_book(parent, info):
+    def resolve_random_book(self, info):
         PASSAGE_LEN = 1000
         book = Book.objects.order_by("?").first()
         start_idx = random.randint(0, len(book.text) - PASSAGE_LEN)
@@ -126,17 +126,17 @@ class Query(graphene.ObjectType):
 
     poem = graphene.Field(PoemType, id=graphene.ID(required=True))
 
-    def resolve_poem(parent, info, id):
+    def resolve_poem(self, info, id):
         return Poem.objects.get(id=id)
 
     user = graphene.Field(UserType, id=graphene.ID(required=True))
 
-    def resolve_user(parent, info, id):
+    def resolve_user(self, info, id):
         return User.objects.get(id=id)
 
     poems = graphene.List(PoemType, author_id=graphene.ID(required=False))
 
-    def resolve_poems(parent, info, author_id=None):
+    def resolve_poems(self, info, author_id=None):
         if author_id:
             return Poem.objects.filter(author_id=author_id)
         return Poem.objects.all()
@@ -148,7 +148,7 @@ class Query(graphene.ObjectType):
         author_id=graphene.ID(required=False),
     )
 
-    def resolve_poem_pages(parent, info, offset=0, limit=10, author_id=None):
+    def resolve_poem_pages(self, info, offset=0, limit=10, author_id=None):
         poems = Poem.objects.order_by("-created_at")
         if author_id:
             poems = poems.filter(author_id=author_id)
@@ -157,12 +157,12 @@ class Query(graphene.ObjectType):
 
     users = graphene.List(UserType)
 
-    def resolve_users(parent, info):
+    def resolve_users(self, info):
         return User.objects.all()
 
     current = graphene.Field(UserType)
 
-    def resolve_current(parent, info):
+    def resolve_current(self, info):
         if info.context.user.username:
             return info.context.user
         else:
