@@ -18,9 +18,8 @@ class TextChunkDict(TypedDict):
 
 
 class SelectedTextDict(TypedDict):
-    start_idx: str
-    end_idx: str
-
+    start_idx: int
+    end_idx: int
 
 class Poem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)

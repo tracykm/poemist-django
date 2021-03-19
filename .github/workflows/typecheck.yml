@@ -1,0 +1,25 @@
+name: backend checks
+on:
+  push:
+    paths:
+      - "backend/**"
+defaults:
+  run:
+    working-directory: backend
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - name: Install PyRight
+        run: npm i pyright
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      - name: Typecheck
+        run: node_modules/pyright/index.js
+      - name: Run black --check .
+        run: black --check --exclude db/migrations .
