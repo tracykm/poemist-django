@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys, os
 
+
 all_prefixes = {}
 for file in os.listdir("db/migrations"):
     prefix = file.split("_")[0]
