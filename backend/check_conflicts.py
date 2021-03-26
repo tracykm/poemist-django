@@ -2,7 +2,7 @@
 import sys, os
 
 all_prefixes = {}
-for file in os.listdir("./migrations"):
+for file in os.listdir("db/migrations"):
     prefix = file.split("_")[0]
     if prefix:
         if prefix in all_prefixes:

@@ -15,20 +15,23 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.9
+      - name: check for migration conflict
+        run: ls
+        run: python check_conflicts.py 
 
-      - uses: actions/cache@v2
-        with:
-          path: ~/.cache/pip
-          key: ${{ hashFiles('**/requirements.txt') }}
+      # - uses: actions/cache@v2
+      #   with:
+      #     path: ~/.cache/pip
+      #     key: ${{ hashFiles('**/requirements.txt') }}
 
-      - name: Install PyRight
-        run: npm i pyright
+      # - name: Install PyRight
+      #   run: npm i pyright
 
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
+      # - name: Install Dependencies
+      #   run: pip install -r requirements.txt
 
-      - name: Typecheck
-        run: node_modules/pyright/index.js
+      # - name: Typecheck
+      #   run: node_modules/pyright/index.js
 
-      - name: Run black --check .
-        run: black --check --exclude db/migrations .
+      # - name: Run black --check .
+      #   run: black --check --exclude db/migrations .
