@@ -34,6 +34,7 @@ class Poem(models.Model):
     background_id = models.IntegerField(default=1)
 
     def text_chunks(self, selected_texts):
+        print("boo")
         if len(selected_texts) == 0:
             return []
         result = [
