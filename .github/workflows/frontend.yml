@@ -1,0 +1,35 @@
+
+
+name: frontend checks
+on:
+  pull_request:
+    paths:
+      - "frontend/**"
+defaults:
+  run:
+    working-directory: frontend
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        # https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install Dependencies
+        run: yarn
+
+      - name: build
+        run: yarn build
+      - name: check build
+        run: ls build
