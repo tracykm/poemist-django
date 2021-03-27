@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: 3.9
       - name: check for migration conflict
-        run: python check_conflicts.py
+        run: python migration_conflicts.py
 
       # - uses: actions/cache@v2
       #   with:
