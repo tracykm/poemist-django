@@ -37,6 +37,10 @@
     "schemas:watch": "yarn schemas -- --watch",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "typecheck": "tsc -w",
+    "typecheck:run": "tsc",
+    "format:check": "prettier --check './src/**/*.tsx' './src/**/*.ts' './src/**/*.css'",
+    "lint": "eslint './src/**/*.tsx' './src/**/*.ts'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
