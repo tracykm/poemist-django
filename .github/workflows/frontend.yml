@@ -35,7 +35,7 @@ jobs:
         run: yarn build
 
       - name: Create local changes
-        run: node check_bundle_size.js > temp.md
+        run: node check_bundle_size.js > buildSize.json
 
       - name: Commit files
         run: |
