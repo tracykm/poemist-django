@@ -33,4 +33,5 @@ const result = getTotalSize("./build")
 const js = getTotalSize("./build/static/js")
 const css = getTotalSize("./build/static/css")
 const media = getTotalSize("./build/static/media")
+
 console.log(result, { js, css, media })
