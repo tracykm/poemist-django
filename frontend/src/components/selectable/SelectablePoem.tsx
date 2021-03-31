@@ -28,27 +28,5 @@ export default function SelectablePoemRender({
   isSelectingByWord: boolean
   handleClickLetter: IHandleClickLetter
 }) {
-  return (
-    <PoemDiv className="poem close-up">
-      <SelectablePoemDiv>
-        <BodyDiv className="poem-body">
-          <div className="background-img" />
-          <div
-            className={
-              isSelectingByWord ? "selecting-by-word" : "selecting-by-letter"
-            }
-          >
-            {wordLetters.map((word, i) => (
-              <Word
-                word={word}
-                key={i}
-                wordIdx={i}
-                handleClickLetter={handleClickLetter}
-              />
-            ))}
-          </div>
-        </BodyDiv>
-      </SelectablePoemDiv>
-    </PoemDiv>
-  )
+  return <PoemDiv className="poem close-up"></PoemDiv>
 }
