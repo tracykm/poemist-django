@@ -1,3 +1,0 @@
-backend
-frontend
-temp.md

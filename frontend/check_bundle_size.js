@@ -28,8 +28,8 @@ const getTotalSize = function (directoryPath) {
   return totalSize
 }
 
-const result = getTotalSize("./build")
+const total = getTotalSize("./build")
 const js = getTotalSize("./build/static/js")
 const css = getTotalSize("./build/static/css")
 const media = getTotalSize("./build/static/media")
-console.log(result, { js, css, media })
+console.log(JSON.stringify({ total, js, css, media }, null, 2))
