@@ -21,7 +21,6 @@ const getTotalSize = function (directoryPath) {
   const arrayOfFiles = getAllFiles(directoryPath)
 
   let totalSize = 0
-
   arrayOfFiles.forEach(function (filePath) {
     totalSize += fs.statSync(filePath).size
   })
