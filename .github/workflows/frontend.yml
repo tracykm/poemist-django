@@ -6,28 +6,23 @@ on:
 defaults:
   run:
     working-directory: frontend
-
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Cache node modules
-        # https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Install Dependencies
-        run: yarn
+    runs-on: macos-latest
 
-      - name: build
-        run: yarn build
-      - name: check build
-        run: ls build
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run a one-line script
+        run: python ./.github/workflows/todo_List.py
+      - name: switching from HTTPS to SSH
+        run: git remote set-url origin ${{ secrets.ssh }}
+      - name: check for changes
+        run: git status
+      - name: stage changed files
+        run: git add .
+      - name: commit changed files
+        run: git commit -m "Auto updating TODO.txt"
+      - name: fetch from master
+        run: git fetch origin master
+      - name: push code to master
+        run: git push origin HEAD:master
