@@ -1,8 +1,8 @@
-var bundleSize = require("./buildSize.json")
-var bundleSizeNew = require("../../frontend/buildSize2.json")
+var buildSize = require("./buildSize.json")
+var buildSizeNew = require("./buildSize2.json")
 
-const diffArray = Object.entries(bundleSize).map(([name, size]) => {
-  var newSize = bundleSizeNew[name]
+const diffArray = Object.entries(buildSize).map(([name, size]) => {
+  var newSize = buildSizeNew[name]
   return {
     name,
     size: newSize - size,
