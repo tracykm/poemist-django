@@ -9,20 +9,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: buildSize
+          path: frontend/buildSize2.json
+
+      - name: ls
+        run: ls frontend
+
+      - name: compare
+        run: node frontend/compare.js
+
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
           name: buildSize
           path: |
             **/buildSize.json
-
-      - name: change name
-        run: mv frontend/buildSize.json frontend/buildSize2.json
-
-      - name: Download a single artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: buildSize
-
-      - name: compare
-        run: node frontend/compare.js
