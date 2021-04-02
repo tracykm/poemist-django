@@ -30,5 +30,8 @@ jobs:
       - name: see size
         run: cat frontend/buildSize.json
 
+      - name: ls
+        run: ls
+
       - name: compare
-        run: node compare.js
+        run: node ./.github/workflows/manual.yml
