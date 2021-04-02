@@ -20,7 +20,7 @@ jobs:
             **/buildSize.json
 
       - name: change name
-        run: mv frontend/buildSize.json frontend/buildSizeNew.json
+        run: mv frontend/buildSize.json frontend/buildSize2.json
 
       - name: Download a single artifact
         uses: actions/download-artifact@v2
@@ -28,7 +28,7 @@ jobs:
           name: buildSize
 
       - name: see size
-        run: cat frontend/buildSize.json
+        run: cat frontend/buildSize2.json
 
       - name: ls
         run: ls frontend
