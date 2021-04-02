@@ -27,5 +27,8 @@ jobs:
         with:
           name: buildSize
 
-      - name: "see size"
+      - name: see size
         run: cat frontend/buildSize.json
+
+      - name: compare
+        run: node compare.js
