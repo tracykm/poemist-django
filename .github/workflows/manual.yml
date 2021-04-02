@@ -31,7 +31,7 @@ jobs:
         run: cat frontend/buildSize.json
 
       - name: ls
-        run: ls
+        run: ls frontend
 
       - name: compare
-        run: node frontend/manual.yml
+        run: node frontend/compare.js
