@@ -8,9 +8,24 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: see size
+        run: cat frontend/buildSize.json
+
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
           name: buildSize
           path: |
             **/buildSize.json
+
+      - name: change name
+        run: mv frontend/buildSize.json frontend/buildSizeNew.json
+
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: my-artifact
+
+      - name: "see size"
+        run: cat frontend/buildSize.json
