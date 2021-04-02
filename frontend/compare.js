@@ -1,6 +1,8 @@
 const buildSize = require("./buildSize.json")
 const buildSizeNew = require("./buildSize2.json")
 
+console.log({ buildSize, buildSizeNew })
+
 const diffArray = Object.entries(buildSize).map(([name, size]) => {
   const newSize = buildSizeNew[name]
   return {

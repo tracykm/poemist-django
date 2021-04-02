@@ -9,9 +9,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: see size
-        run: cat frontend/buildSize.json
-
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -26,12 +23,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: buildSize
-
-      - name: see size
-        run: cat frontend/buildSize2.json
-
-      - name: ls
-        run: ls frontend
 
       - name: compare
         run: node frontend/compare.js
