@@ -34,4 +34,4 @@ jobs:
         run: ls
 
       - name: compare
-        run: node ./.github/workflows/manual.yml
+        run: node frontend/manual.yml
