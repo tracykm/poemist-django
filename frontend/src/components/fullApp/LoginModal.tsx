@@ -43,7 +43,7 @@ export default function LoginDialog() {
                 localStorage.setItem("token", token)
                 // TODO - hack to get the "refetchQueries" to trigger after the localStorage.setItem
                 window.setTimeout(() => {
-                  loginInUserMutation(formState)
+                  window.location.reload()
                 }, 100)
                 handleClose()
               }),

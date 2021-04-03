@@ -130,7 +130,10 @@ export default function WriteViewWData() {
     query: getSinglePoem,
     variables: { id },
   })
-  const [randomBook, refetchRandomBook] = useQuery({ query: getRandomBook })
+  const [randomBook, refetchRandomBook] = useQuery({
+    query: getRandomBook,
+    requestPolicy: "network-only",
+  })
   const [currentUserRes] = useQuery({ query: getCurrentUser })
   const current = currentUserRes.data?.current
   if (!randomBook.data) return <Loader />

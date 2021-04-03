@@ -5,7 +5,8 @@ import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 import { HashRouter as Router } from "react-router-dom"
 
-import { createClient, Provider } from "urql"
+import { createClient, dedupExchange, fetchExchange, Provider } from "urql"
+import { cacheExchange } from "@urql/exchange-graphcache"
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 import { ApolloProvider } from "@apollo/client"
@@ -41,6 +42,21 @@ const apolloClient = new ApolloClient({
 
 const client = createClient({
   url: process.env.NODE_ENV === "development" ? DEV_API : STAGING_API,
+  exchanges: [
+    cacheExchange({
+      updates: {
+        Mutation: {
+          deletePoem(_result, args, cache, _info) {
+            cache.invalidate({
+              __typename: "PoemType",
+              id: args.id as number,
+            })
+          },
+        },
+      },
+    }),
+    fetchExchange,
+  ],
   fetchOptions: () => {
     const token = localStorage.getItem("token")
     return {
