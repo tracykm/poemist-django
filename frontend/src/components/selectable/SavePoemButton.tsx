@@ -1,12 +1,14 @@
 import { useHistory } from "react-router-dom"
-import { updatePoem, createPoem } from "src/queries/poems"
-import { getCurrentUser } from "src/queries/users"
+import {
+  useCreatePoemMutation,
+  useGetCurrentUserQuery,
+  useUpdatePoemMutation,
+} from "src/queries/autogenerate/hooks"
 import getSelectedTexts from "src/utils/getSelectedTexts"
-import { useMutation, useQuery } from "urql"
 
 export default function SavePoemButton({ poem, children }) {
   const history = useHistory()
-  const [{ data }] = useQuery({ query: getCurrentUser })
+  const [{ data }] = useGetCurrentUserQuery()
   const author = data?.current
   let { id, textChunks, backgroundId, colorRange, book, startIdx } = poem
   const bookId = book?.id
@@ -15,7 +17,7 @@ export default function SavePoemButton({ poem, children }) {
   } else {
     textChunks = textChunks.map(({ __typename, ...rest }) => rest)
   }
-  const [updatePoemResult, updatePoemMutation] = useMutation(updatePoem)
+  const [updatePoemResult, updatePoemMutation] = useUpdatePoemMutation()
   const updatePoemFunc = () => {
     debugger
     return updatePoemMutation({
@@ -25,7 +27,7 @@ export default function SavePoemButton({ poem, children }) {
       colorRange,
     })
   }
-  const [createPoemResult, createPoemMutation] = useMutation(createPoem)
+  const [createPoemResult, createPoemMutation] = useCreatePoemMutation()
   const createPoemFunc = () =>
     createPoemMutation({
       textChunks,
@@ -33,7 +35,7 @@ export default function SavePoemButton({ poem, children }) {
       startIdx,
     })
 
-  let savePoem = id ? updatePoemFunc : createPoemFunc
+  let savePoem: any = id ? updatePoemFunc : createPoemFunc
   if (!author) {
     savePoem = () => {
       history.push("?showSignUp=true")

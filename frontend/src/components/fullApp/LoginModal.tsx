@@ -11,17 +11,19 @@ import {
 } from "@material-ui/core"
 import { useState } from "react"
 import { Link, useHistory, useLocation } from "react-router-dom"
-import { createUser, loginUser } from "src/queries/users"
 import { FaTimes } from "react-icons/fa"
-import { useMutation } from "urql"
+import {
+  useCreateUserMutation,
+  useLoginUserMutation,
+} from "src/queries/autogenerate/hooks"
 
 export default function LoginDialog() {
   const [formState, setFormState] = useState({
     username: "",
     password: "",
   })
-  const [loginInUserResult, loginInUserMutation] = useMutation(loginUser)
-  const [createUserResult, createUserMutation] = useMutation(createUser)
+  const [loginInUserResult, loginInUserMutation] = useLoginUserMutation()
+  const [createUserResult, createUserMutation] = useCreateUserMutation()
   const location = useLocation()
   const history = useHistory()
   const handleClose = () => history.push(history.location.pathname)

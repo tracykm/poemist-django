@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import StyleToolbar from "src/components/selectable/StyleToolbar"
 import Poem from "src/components/poem/Poem"
 import Loader from "../universal/Loader"
-import { getSinglePoem } from "src/queries/poems"
-import { useQuery } from "urql"
+import { useGetSinglePoemQuery } from "src/queries/autogenerate/hooks"
 
 export default function StyleView() {
   const { id } = useParams<{ id: string }>()
-  const [{ data }] = useQuery({ query: getSinglePoem, variables: { id } })
+  const [{ data }] = useGetSinglePoemQuery({ variables: { id } })
   const [poem, setPoem] = useState(data?.poem)
   useEffect(() => {
     setPoem(data?.poem)

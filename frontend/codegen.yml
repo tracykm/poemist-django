@@ -15,7 +15,7 @@ generates:
     documents: "src/queries/**/**.ts"
     preset: import-types
     presetConfig:
-      typesPath: ./operations
+      typesPath: ./schemas
     plugins:
       - typescript-operations
       - typescript-urql

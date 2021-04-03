@@ -1,14 +1,16 @@
 import moment from "moment"
 import IndexView from "src/components/manyPoemViews/IndexView"
 import Loader from "../universal/Loader"
-import { getCurrentUser, getUser } from "src/queries/users"
 import { getPoemsByAuthor } from "src/queries/poems"
 import { useParams } from "react-router-dom"
-import { useQuery } from "urql"
+import {
+  useGetCurrentUserQuery,
+  useGetUserQuery,
+} from "src/queries/autogenerate/hooks"
 
 const ProfileHeader = ({ id }) => {
-  const [{ data }] = useQuery({ query: getUser, variables: { id } })
-  const [currentUserRes] = useQuery({ query: getCurrentUser })
+  const [{ data }] = useGetUserQuery({ variables: { id } })
+  const [currentUserRes] = useGetCurrentUserQuery()
   const currentUserId = currentUserRes.data?.current?.id
   if (!data) return <Loader />
   const { user } = data

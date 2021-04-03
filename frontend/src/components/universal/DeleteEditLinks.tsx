@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom"
-import { deletePoem } from "src/queries/poems"
-import { getCurrentUser } from "src/queries/users"
 import { Link as MuiLink } from "@material-ui/core"
-import { useMutation, useQuery } from "urql"
+import {
+  useDeletePoemMutation,
+  useGetCurrentUserQuery,
+} from "src/queries/autogenerate/hooks"
 
 export default function DeleteEditLinks({ authorId, poemId }) {
-  const [{ data }] = useQuery({ query: getCurrentUser })
+  const [{ data }] = useGetCurrentUserQuery()
   const isCurrentUser = data?.current?.id === authorId
-  const [_, deletePoemMutation] = useMutation(deletePoem)
+  const [_, deletePoemMutation] = useDeletePoemMutation()
   return (
     <span className="delete-edit-links">
       {isCurrentUser && (
@@ -19,9 +20,6 @@ export default function DeleteEditLinks({ authorId, poemId }) {
               ) {
                 deletePoemMutation({
                   id: poemId,
-                  fetch: () => {
-                    console.log("")
-                  },
                 }).then((res) => {
                   debugger
                   return res.data
