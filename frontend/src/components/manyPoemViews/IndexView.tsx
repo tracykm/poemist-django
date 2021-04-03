@@ -57,7 +57,7 @@ export default function IndexView({
     <PoemContainerDiv>
       <InfiniteScroll
         loadMore={(page) => {
-          // debugger
+          // TODO stop this from being called until others load
           setPageVariables([
             ...pageVariables,
             { offset: 10 * page, limit: 10, ...variables },
