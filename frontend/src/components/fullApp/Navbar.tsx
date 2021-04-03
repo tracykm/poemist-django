@@ -2,10 +2,11 @@ import { NavLink } from "react-router-dom"
 import PoemistLogo from "src/components/fullApp/Logo"
 import NavbarDiv from "./NavbarDiv"
 import { useHistory } from "react-router-dom"
-import { useGetCurrentUserQuery } from "src/queries/autogenerate/hooks"
+import { useQuery } from "urql"
 import LoginModal from "./LoginModal"
 import Dropdown from "../universal/Dropdown"
 import { FaAngleDown } from "react-icons/fa"
+import { getCurrentUser } from "src/queries/users"
 
 const LogInOut = ({ toggleShowLogin }: { toggleShowLogin: () => void }) => (
   <span>
@@ -18,7 +19,7 @@ const LogInOut = ({ toggleShowLogin }: { toggleShowLogin: () => void }) => (
 
 function Navbar() {
   const history = useHistory()
-  const { data } = useGetCurrentUserQuery()
+  const [{ data }] = useQuery({ query: getCurrentUser })
   const currentUser = data?.current
   return (
     <div

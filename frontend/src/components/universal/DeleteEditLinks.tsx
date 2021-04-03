@@ -4,15 +4,17 @@ import {
   GetPoemsDocument,
   GetPoemsByAuthorDocument,
   useDeletePoemMutation,
-  useGetCurrentUserQuery,
 } from "src/queries/autogenerate/hooks"
+import { getPoems, getPoemsByAuthor } from "src/queries/poems"
+import { getCurrentUser } from "src/queries/users"
 import produce from "immer"
 import { GetPoemsQuery } from "src/queries/autogenerate/operations"
 import { Link as MuiLink } from "@material-ui/core"
 import updateCache from "src/utils/updateCache"
+import { useQuery } from "urql"
 
 export default function DeleteEditLinks({ authorId, poemId }) {
-  const { data } = useGetCurrentUserQuery()
+  const [{ data }] = useQuery({ query: getCurrentUser })
   const isCurrentUser = data?.current?.id === authorId
   const [deletePoem] = useDeletePoemMutation({
     variables: { id: poemId },

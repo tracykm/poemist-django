@@ -1,16 +1,14 @@
 import moment from "moment"
 import IndexView from "src/components/manyPoemViews/IndexView"
 import Loader from "../universal/Loader"
-import {
-  useGetUserQuery,
-  useGetPoemsByAuthorQuery,
-  useGetCurrentUserQuery,
-} from "src/queries/autogenerate/hooks"
+import { getCurrentUser, getUser } from "src/queries/users"
+import { getPoemsByAuthor } from "src/queries/poems"
 import { useParams } from "react-router-dom"
+import { useQuery } from "urql"
 
 const ProfileHeader = ({ id }) => {
-  const { data } = useGetUserQuery({ variables: { id } })
-  const currentUserRes = useGetCurrentUserQuery()
+  const [{ data }] = useQuery({ query: getUser, variables: { id } })
+  const [currentUserRes] = useQuery({ query: getCurrentUser })
   const currentUserId = currentUserRes.data?.current?.id
   if (!data) return <Loader />
   const { user } = data
@@ -33,11 +31,12 @@ const ProfileHeader = ({ id }) => {
 }
 
 function UserPoems({ authorId }) {
-  const { data, fetchMore } = useGetPoemsByAuthorQuery({
+  const [{ data }, reexecuteQuery] = useQuery({
+    query: getPoemsByAuthor,
     variables: { authorId, limit: 10 },
   })
   if (!data) return <Loader />
-  return <IndexView poems={data.poemPages} fetchMore={fetchMore} />
+  return <IndexView poems={data.poemPages} fetchMore={reexecuteQuery} />
 }
 
 export default function ProfileView() {

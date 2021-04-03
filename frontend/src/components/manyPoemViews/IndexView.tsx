@@ -31,7 +31,7 @@ export default function IndexView({
   fetchMore,
 }: {
   poems: GetPoemsQuery["poemPages"]
-  fetchMore?: (vars: any) => Promise<any>
+  fetchMore?: any
 }) {
   return (
     <PoemContainerDiv>

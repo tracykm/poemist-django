@@ -1,9 +1,13 @@
 import IndexView from "src/components/manyPoemViews/IndexView"
-import { useGetPoemsQuery } from "src/queries/autogenerate/hooks"
+import { getPoems } from "src/queries/poems"
+import { useQuery } from "urql"
 import Loader from "../universal/Loader"
 
 export default function HomeView() {
-  const { data, fetchMore } = useGetPoemsQuery({ variables: { limit: 10 } })
+  const [{ data }, reexecuteQuery] = useQuery({
+    query: getPoems,
+    variables: { limit: 10 },
+  })
   if (!data) {
     return <Loader />
   }
@@ -11,7 +15,7 @@ export default function HomeView() {
   return (
     <div className="index-view">
       <h5>Browse through all the communities poems!</h5>
-      <IndexView {...{ poems: data.poemPages, fetchMore }} />
+      <IndexView {...{ poems: data.poemPages, reexecuteQuery }} />
     </div>
   )
 }
