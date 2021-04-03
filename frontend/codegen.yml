@@ -11,23 +11,14 @@ generates:
     documents: "src/queries/**/**.ts"
     plugins:
       - typescript
-  # Create operations based on queries
-  src/queries/autogenerate/operations.tsx:
-    documents: "src/queries/**/**.ts"
-    preset: import-types
-    presetConfig:
-      typesPath: ./schemas
-    plugins:
-      - typescript-operations
-  # 1. Export GraphQL documents
-  # 2. React interface
   src/queries/autogenerate/hooks.tsx:
     documents: "src/queries/**/**.ts"
     preset: import-types
     presetConfig:
       typesPath: ./operations
     plugins:
-      - typescript-react-apollo
+      - typescript-operations
+      - typescript-urql
     config:
       # Optionals
       withHOC: false

@@ -7,7 +7,7 @@ import { useMutation, useQuery } from "urql"
 export default function DeleteEditLinks({ authorId, poemId }) {
   const [{ data }] = useQuery({ query: getCurrentUser })
   const isCurrentUser = data?.current?.id === authorId
-  const [deletePoemResult, deletePoemMutation] = useMutation(deletePoem)
+  const [_, deletePoemMutation] = useMutation(deletePoem)
   return (
     <span className="delete-edit-links">
       {isCurrentUser && (

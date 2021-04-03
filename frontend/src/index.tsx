@@ -5,7 +5,7 @@ import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 import { HashRouter as Router } from "react-router-dom"
 
-import { createClient, dedupExchange, fetchExchange, Provider } from "urql"
+import { createClient, fetchExchange, Provider } from "urql"
 import { cacheExchange } from "@urql/exchange-graphcache"
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
