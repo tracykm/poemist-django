@@ -31,12 +31,9 @@ const ProfileHeader = ({ id }) => {
 }
 
 function UserPoems({ authorId }) {
-  const [{ data }, reexecuteQuery] = useQuery({
-    query: getPoemsByAuthor,
-    variables: { authorId, limit: 10 },
-  })
-  if (!data) return <Loader />
-  return <IndexView poems={data.poemPages} fetchMore={reexecuteQuery} />
+  return (
+    <IndexView query={getPoemsByAuthor} variables={{ authorId, limit: 10 }} />
+  )
 }
 
 export default function ProfileView() {

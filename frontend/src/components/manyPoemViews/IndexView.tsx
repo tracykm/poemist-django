@@ -5,6 +5,9 @@ import InfiniteScroll from "react-infinite-scroller"
 import Loader from "../universal/Loader"
 import produce from "immer"
 import { sizes } from "../universal/_variables"
+import { DocumentNode } from "graphql"
+import { useQuery } from "urql"
+import { useState } from "react"
 
 export const LoadingPoemDiv = styled.div`
   width: ${sizes.poemWidth}px;
@@ -26,32 +29,46 @@ export const PoemContainerDiv = styled.div`
   }
 `
 
-export default function IndexView({
-  poems,
-  fetchMore,
+function PageOfPoems({
+  query,
+  variables = {},
 }: {
-  poems: GetPoemsQuery["poemPages"]
-  fetchMore?: any
+  query: DocumentNode
+  variables?: Record<string, any>
 }) {
+  const [{ data, fetching }] = useQuery({ query, variables })
+  if (fetching) {
+    return <Loader />
+  }
+  return data.poemPages?.edges.map((poem) => {
+    return <Poem poem={poem} key={poem.id} />
+  })
+}
+
+export default function IndexView({
+  query,
+  variables = { limit: 10, offset: 0 },
+}: {
+  query: DocumentNode
+  variables?: Record<string, any>
+}) {
+  const [pageVariables, setPageVariables] = useState([variables])
   return (
     <PoemContainerDiv>
       <InfiniteScroll
         loadMore={(page) => {
-          return fetchMore({
-            variables: { offset: 10 * page, limit: 10 },
-            updateQuery: (prevResult, { fetchMoreResult }) =>
-              produce(prevResult, (draft) => {
-                draft.poemPages.edges.push(...fetchMoreResult.poemPages.edges)
-              }),
-          })
+          // debugger
+          setPageVariables([
+            ...pageVariables,
+            { offset: 10 * page, limit: 10, ...variables },
+          ])
         }}
-        hasMore={!(poems.edges.length % 10)}
+        hasMore={pageVariables.length < 5}
         loader={<Loader />}
       >
-        {poems &&
-          poems.edges.map((poem) => {
-            return <Poem poem={poem} key={poem.id} />
-          })}
+        {pageVariables.map((variables) => (
+          <PageOfPoems {...{ query, variables }} />
+        ))}
       </InfiniteScroll>
     </PoemContainerDiv>
   )
