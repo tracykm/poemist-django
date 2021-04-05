@@ -7,5 +7,5 @@ export default function SelectablePoemRender({}: {
   isSelectingByWord: boolean
   handleClickLetter: IHandleClickLetter
 }) {
-  return <PoemDiv className="poem close-up"></PoemDiv>
+  return <PoemDiv className="poem close-up" />
 }
