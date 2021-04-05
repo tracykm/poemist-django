@@ -16,6 +16,7 @@ export default function About() {
           and phrases from another text.
         </i>
       </p>
+
       <section>
         <p>
           It may seem limiting to choose words only from a prearranged set, but
