@@ -9,33 +9,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: ls
-        run: ls frontend
-
       - name: Download artifact
         uses: dawidd6/action-download-artifact@v2
         with:
-          # Required, workflow file name or ID
           workflow: manual.yml
           branch: try-frontend-build-check
           name: buildSize
-          path: old
-
-      - name: ls
-        run: ls frontend
-
-      - name: ls
-        run: ls frontend/old
+          path: frontend/old
 
       - name: compare
         run: node frontend/compare.js
-
-      - name: change name
-        run: mv frontend/buildSize2.json frontend/buildSize.json
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
           name: buildSize
           path: |
-            **/buildSize.json
+            frontend/buildSize.json

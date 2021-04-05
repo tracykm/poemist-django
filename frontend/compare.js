@@ -1,4 +1,4 @@
-const buildSize = require("./buildSize.json")
+const buildSize = require("./old/buildSize.json")
 const buildSizeNew = require("./buildSize2.json")
 
 console.log({ buildSize, buildSizeNew })
