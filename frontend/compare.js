@@ -1,10 +1,10 @@
-const buildSize = require("./old/buildSize.json")
-const buildSizeNew = require("./buildSize2.json")
+const oldBundleSize = require("./old/bundleSize.json")
+const bundleSize = require("./bundleSize2.json")
 
-console.log({ buildSize, buildSizeNew })
+console.log({ oldBundleSize, bundleSize })
 
-const diffArray = Object.entries(buildSize).map(([name, size]) => {
-  const newSize = buildSizeNew[name]
+const diffArray = Object.entries(oldBundleSize).map(([name, size]) => {
+  const newSize = bundleSize[name]
   return {
     name,
     size: newSize - size,
@@ -13,7 +13,7 @@ const diffArray = Object.entries(buildSize).map(([name, size]) => {
 
 console.log(diffArray)
 
-if (buildSizeNew.total - buildSize.total > 200) {
+if (bundleSize.total - oldBundleSize.total > 200) {
   console.warn("bundle got much bigger")
   process.exit(1)
 }

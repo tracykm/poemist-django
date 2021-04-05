@@ -1,8 +1,13 @@
-name: frontend checks
+name: Main Push
+
 on:
   push:
     paths:
       - "frontend/**"
+    branches:
+      - main
+  workflow_dispatch:
+
 defaults:
   run:
     working-directory: frontend
@@ -24,6 +29,7 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+
       - name: Install Dependencies
         run: yarn
 
@@ -33,13 +39,8 @@ jobs:
       - name: check build
         run: node checkBundleSize.js > bundleSize.json && cat bundleSize.json
 
-      - name: Download main bundleSize
-        uses: dawidd6/action-download-artifact@v2
+      - name: Archive bundleSize
+        uses: actions/upload-artifact@v2
         with:
-          workflow: main.yml
-          branch: main
-          name: buildSize
-          path: frontend/old
-
-      - name: compare
-        run: node frontend/compare.js
+          name: bundleSize
+          path: frontend/bundleSize.json

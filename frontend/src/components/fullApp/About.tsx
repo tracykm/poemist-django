@@ -10,12 +10,14 @@ export default function About() {
   return (
     <DivAbout className="about">
       <h1>About</h1>
+
       <p>
         <i>
           A <strong>found poem</strong> is a poem that is composed with words
           and phrases from another text.
         </i>
       </p>
+
       <section>
         <p>
           It may seem limiting to choose words only from a prearranged set, but
