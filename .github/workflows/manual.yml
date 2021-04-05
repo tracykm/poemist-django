@@ -12,9 +12,6 @@ jobs:
       - name: ls
         run: ls frontend
 
-      - name: change name
-        run: mv frontend/buildSize.json frontend/buildSize2.json
-
       - name: Download artifact
         uses: dawidd6/action-download-artifact@v2
         with:
@@ -22,9 +19,13 @@ jobs:
           workflow: manual.yml
           branch: try-frontend-build-check
           name: buildSize
+          path: old
 
       - name: ls
         run: ls frontend
+
+      - name: ls
+        run: ls frontend/old
 
       - name: compare
         run: node frontend/compare.js
