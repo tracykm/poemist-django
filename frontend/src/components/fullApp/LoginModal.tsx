@@ -28,7 +28,6 @@ export default function LoginDialog() {
   })
   const [createUserMutation, { error: signUpError }] = useCreateUserMutation({
     refetchQueries: [{ query: GetCurrentUserDocument }],
-    // errorPolicy: "ignore",
   })
   const location = useLocation()
   const history = useHistory()
