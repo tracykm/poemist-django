@@ -9,27 +9,21 @@ import {
   Link as MuiLink,
   IconButton,
 } from "@material-ui/core"
-import React, { useState } from "react"
+import { useState } from "react"
 import { Link, useHistory, useLocation } from "react-router-dom"
-import {
-  useLoginUserMutation,
-  useCreateUserMutation,
-  GetCurrentUserDocument,
-} from "src/queries/autogenerate/hooks"
 import { FaTimes } from "react-icons/fa"
+import {
+  useCreateUserMutation,
+  useLoginUserMutation,
+} from "src/queries/autogenerate/hooks"
 
 export default function LoginDialog() {
   const [formState, setFormState] = useState({
     username: "",
     password: "",
   })
-  const [loginInUserMutation, { error: loginError }] = useLoginUserMutation({
-    refetchQueries: [{ query: GetCurrentUserDocument }],
-  })
-  const [createUserMutation, { error: signUpError }] = useCreateUserMutation({
-    refetchQueries: [{ query: GetCurrentUserDocument }],
-    // errorPolicy: "ignore",
-  })
+  const [loginInUserResult, loginInUserMutation] = useLoginUserMutation()
+  const [createUserResult, createUserMutation] = useCreateUserMutation()
   const location = useLocation()
   const history = useHistory()
   const handleClose = () => history.push(history.location.pathname)
@@ -42,18 +36,16 @@ export default function LoginDialog() {
           e.preventDefault()
           let createPromise: Promise<any> = Promise.resolve()
           if (showSignUp) {
-            createPromise = createUserMutation({
-              variables: formState,
-            })
+            createPromise = createUserMutation(formState)
           }
           createPromise
             .then(() =>
-              loginInUserMutation({ variables: formState }).then((res) => {
+              loginInUserMutation(formState).then((res) => {
                 const { token } = res.data.tokenAuth
                 localStorage.setItem("token", token)
                 // TODO - hack to get the "refetchQueries" to trigger after the localStorage.setItem
                 window.setTimeout(() => {
-                  loginInUserMutation({ variables: formState })
+                  window.location.reload()
                 }, 100)
                 handleClose()
               }),
@@ -102,10 +94,10 @@ export default function LoginDialog() {
             </Link>
           )}
           <Typography color="error">
-            {signUpError?.message?.includes("UNIQUE")
+            {createUserResult.error?.message?.includes("UNIQUE")
               ? "Username already taken"
-              : signUpError?.message}
-            {loginError?.message}
+              : createUserResult.error?.message}
+            {loginInUserResult.error?.message}
           </Typography>
         </DialogContent>
         <DialogActions>

@@ -23,6 +23,7 @@ const PoemDetails = gql`
 `
 
 export const getSinglePoem = gql`
+  ${PoemDetails}
   query getSinglePoem($id: ID!) {
     poem(id: $id) {
       ...PoemDetails
@@ -31,6 +32,7 @@ export const getSinglePoem = gql`
 `
 
 export const getPoems = gql`
+  ${PoemDetails}
   query getPoems($offset: Int, $limit: Int) {
     poemPages(offset: $offset, limit: $limit) {
       edges {
@@ -41,6 +43,7 @@ export const getPoems = gql`
 `
 
 export const getPoemsByAuthor = gql`
+  ${PoemDetails}
   query getPoemsByAuthor($authorId: ID, $offset: Int, $limit: Int) {
     poemPages(authorId: $authorId, offset: $offset, limit: $limit) {
       edges {
@@ -51,6 +54,7 @@ export const getPoemsByAuthor = gql`
 `
 
 export const createPoem = gql`
+  ${PoemDetails}
   mutation createPoem(
     $textChunks: [InputTextChunkType]!
     $bookId: ID!
@@ -65,6 +69,7 @@ export const createPoem = gql`
 `
 
 export const updatePoem = gql`
+  ${PoemDetails}
   mutation updatePoem(
     $textChunks: [InputTextChunkType]!
     $id: ID!
