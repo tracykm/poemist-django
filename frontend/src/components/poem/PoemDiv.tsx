@@ -49,6 +49,7 @@ while (i < 36) {
 }
 
 const PoemDiv = styled.div`
+  font-size: ${sizes.fontSizeBase - 1}px;
   ${stringColors};
   &.close-up {
     margin: auto;
@@ -79,7 +80,7 @@ const PoemDiv = styled.div`
       }
     }
   }
-  width: ${sizes.poemWidth}px;
+  width: ${sizes.poemWidth - 14}px;
   margin: 1em;
   display: inline-block;
   vertical-align: text-top;
