@@ -11,7 +11,7 @@ const LogInOut = ({ toggleShowLogin }: { toggleShowLogin: () => void }) => (
   <span>
     {/* eslint-disable-next-line */}
     <a onClick={toggleShowLogin} data-test="signUpLink">
-      Sign Upp
+      Sign Up
     </a>
   </span>
 )
