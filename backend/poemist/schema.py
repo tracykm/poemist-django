@@ -12,6 +12,9 @@ class PaginationType(graphene.ObjectType):
     total_count = graphene.Int()
 
 
+#
+
+
 class PomePaginationType(PaginationType):
     class Meta:
         gql_type = PoemType
