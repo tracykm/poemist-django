@@ -19,7 +19,6 @@ class PomePaginationType(PaginationType):
     edges = graphene.List(PoemType)
 
 
-#
 class BookPassage(graphene.ObjectType):
     text = graphene.String()
     author = graphene.String()
