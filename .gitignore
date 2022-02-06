@@ -147,3 +147,6 @@ dmypy.json
 
 poemist/staticfiles
 backend/env
+backend/data
+backend/staticfiles
+*.DS_Store
