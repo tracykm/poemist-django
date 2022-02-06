@@ -25,7 +25,7 @@ import electronic from "src/images/electronic.jpg"
 
 export const BodyDiv = styled.div`
   line-height: 1em;
-  height: 25em; /* 25 lines */
+  height: 30em; /* 30 lines */
   overflow: hidden;
   font-family: "Garamond", serif;
   font-weight: 400;
