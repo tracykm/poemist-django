@@ -3,16 +3,16 @@ deploy to heroku
 # in backend folder
 
 ```
-docker build -t registry.heroku.com/calm-lowlands-48993/web .   &&   docker push registry.heroku.com/calm-lowlands-48993/web   &&   heroku container:release -a calm-lowlands-48993 web   &&   heroku open -a calm-lowlands-48993
+docker buildx build --platform linux/amd64 -t registry.heroku.com/poemist-django/web .   &&   docker push registry.heroku.com/poemist-django/web   &&   heroku container:release -a poemist-django web   &&   heroku open -a poemist-django
 
 ```
 
 load seed data
 
 ```
-heroku run python manage.py migrate -a calm-lowlands-48993
+heroku run python manage.py migrate -a poemist-django
 
-heroku run python manage.py loaddata db/fixtures/seed_data.json -a calm-lowlands-48993
+heroku run python manage.py loaddata db/fixtures/seed_data.json -a poemist-django
 
-heroku logs --tail -a calm-lowlands-48993
+heroku logs --tail -a poemist-django
 ```
