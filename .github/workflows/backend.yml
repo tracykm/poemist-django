@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - "backend/**"
+  workflow_dispatch:
 defaults:
   run:
     working-directory: backend
