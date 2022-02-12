@@ -7,6 +7,9 @@ format:
 migrate:
 	docker-compose run --rm api python manage.py migrate
 
+reset:
+	docker-compose down --volumes && make up && make migrate
+
 seed_data:
 	docker-compose run api python manage.py seed_data
 
