@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - "backend/**"
+  workflow_dispatch:
 defaults:
   run:
     working-directory: backend
@@ -29,8 +30,5 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
-      - name: Typecheck
-        run: node_modules/pyright/index.js
-
-      - name: Run black --check .
-        run: black --check --exclude db/migrations .
+      # - name: Run black --check .
+      #   run: black --check --exclude db/migrations .

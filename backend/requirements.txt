@@ -1,10 +1,10 @@
 aniso8601==7.0.0
 appdirs==1.4.4
-asgiref==3.3.1
+asgiref==3.3.2
 black==20.8b1
 click==7.1.2
 dj-database-url==0.5.0
-Django==3.1.4
+Django==3.2.12
 django-cors-headers==3.6.0
 django-environ==0.4.5
 django-extensions==3.1.0
@@ -30,4 +30,3 @@ toml==0.10.2
 typed-ast==1.4.2
 typing-extensions==3.7.4.3
 Werkzeug==1.0.1
-whitenoise==5.2.0

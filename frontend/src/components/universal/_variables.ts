@@ -3,7 +3,7 @@ export const sizes = {
   spaceBase: 15,
 
   poemWidth: 250,
-  poemHeight: 600,
+  poemHeight: 1200,
 
   fontSizeXs: 12,
   fontSizeBase: 16,

@@ -14,7 +14,7 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import { createMuiTheme, ThemeProvider } from "@material-ui/core"
 
 const DEV_API = "http://localhost:8000/graphql"
-const STAGING_API = "https://calm-lowlands-48993.herokuapp.com/graphql"
+const STAGING_API = "https://poemist-django.herokuapp.com/graphql"
 
 const httpLink = createHttpLink({
   uri: process.env.NODE_ENV === "development" ? DEV_API : STAGING_API,

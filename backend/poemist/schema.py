@@ -113,7 +113,7 @@ class Query(graphene.ObjectType):
     random_book = graphene.Field(BookPassage)
 
     def resolve_random_book(self, info):
-        PASSAGE_LEN = 1000
+        PASSAGE_LEN = 2000
         book = Book.objects.order_by("?").first()
         start_idx = random.randint(0, len(book.text) - PASSAGE_LEN)
         return {
