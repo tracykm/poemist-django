@@ -11,19 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-
-      # In this step, this action saves a list of existing images,
-      # the cache is created without them in the post run.
-      # It also restores the cache if it exists.
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
         with:
-          key: backend-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: backend-${{ hashFiles('**/requirements.txt') }}
+          python-version: 3.9
+      - name: check for migration conflict
+        run: python migration_conflicts.py
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ hashFiles('**/requirements.txt') }}
 
       - name: Install PyRight
-        run: make up
+        run: npm i pyright
 
-      - name: Typecheck
-        run: make format
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      # - name: Run black --check .
+      #   run: black --check --exclude db/migrations .
