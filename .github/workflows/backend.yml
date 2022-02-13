@@ -16,8 +16,8 @@ jobs:
         # Ignore the failure of a step and avoid terminating the job.
         continue-on-error: true
         with:
-          key: backend-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: backend-${{ hashFiles('**/requirements.txt') }}
+          key: all-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/package.json') }}
+          restore-keys: all-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/package.json') }}
 
       - name: Build
         run: make reset
