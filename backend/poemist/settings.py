@@ -160,7 +160,7 @@ AUTHENTICATION_BACKENDS = [
 CORS_ORIGIN_WHITELIST = (
     "http://localhost:3000",
     "http://localhost:3001",
-    "http://localhost:8000",
+    "http://localhost:8008",
     "https://tracykm.github.io",
     "https://poemist.net",
     "https://wwww.poemist.net",

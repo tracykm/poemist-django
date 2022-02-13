@@ -4,11 +4,11 @@ services:
   api:
     build: 
       context: ./backend
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8008
     volumes:
       - ./backend:/app
     ports:
-      - "8000:8000"
+      - "8008:8008"
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
@@ -24,3 +24,10 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
+  frontend:
+    build: 
+      context: ./frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"

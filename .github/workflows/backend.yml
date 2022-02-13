@@ -29,5 +29,5 @@ jobs:
       - name: Check Formatting
         run: make format
 
-      - name: Check Formatting
+      - name: Migrate
         run: make migrate

@@ -13,7 +13,7 @@ import { ErrorBoundary } from "./components/universal/ErrorBoundary"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { createMuiTheme, ThemeProvider } from "@material-ui/core"
 
-const DEV_API = "http://localhost:8000/graphql"
+const DEV_API = "http://localhost:8008/graphql"
 const STAGING_API = "https://poemist-django.herokuapp.com/graphql"
 
 const httpLink = createHttpLink({
