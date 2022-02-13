@@ -25,5 +25,7 @@ jobs:
       - name: Check Formatting
         run: make format
 
-      - name: Cypress
-        run: make cypress
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          project: ./frontend
