@@ -1,12 +1,8 @@
 name: backend checks
 on:
   push:
-    paths:
-      - "backend/**"
   workflow_dispatch:
-defaults:
-  run:
-    working-directory: backend
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,10 +20,10 @@ jobs:
           restore-keys: backend-${{ hashFiles('**/requirements.txt') }}
 
       - name: Build
-        run: make up env_file=.env_test
+        run: make reset
 
       - name: Check Formatting
         run: make format
 
-      - name: Migrate
-        run: make migrate
+      - name: Cypress
+        run: make cypress
