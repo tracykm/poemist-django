@@ -1,7 +1,7 @@
-FROM node:12.14.1
+FROM cypress/included:7.6.0
 
 WORKDIR /app
-COPY package.json /usr/src/app/package.json
+COPY package.json app/package.json
 RUN npm install --silent
 
 COPY . .
