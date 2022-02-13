@@ -26,7 +26,4 @@ jobs:
         run: make format
 
       - name: Cypress tests
-        uses: cypress-io/github-action@v2
-        with:
-          wait-on: "http://localhost:3000"
-          record: true
+        run: make cypress
