@@ -29,6 +29,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", default="foo")
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "api",
     "localhost",
     "127.0.0.1",
     "calm-lowlands-48993.herokuapp.com",
@@ -161,6 +162,7 @@ CORS_ORIGIN_WHITELIST = (
     "http://localhost:3000",
     "http://localhost:3001",
     "http://localhost:8008",
+    "http://frontend:3000",
     "https://tracykm.github.io",
     "https://poemist.net",
     "https://wwww.poemist.net",

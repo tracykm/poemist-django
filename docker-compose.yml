@@ -31,3 +31,18 @@ services:
       - ./frontend:/app
     ports:
       - "3000:3000"
+    environment:
+      - REACT_APP_API_ENDPOINT=http://api:8008/
+  cypress:
+    image: cypress
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile-cypress
+    depends_on:
+      - frontend
+    environment:
+      - CYPRESS_baseUrl=http://frontend:3000
+    volumes:
+      - ./frontend/cypress:/app/cypress
+      - ./frontend/cypress.json:/app/cypress.json
+

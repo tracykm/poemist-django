@@ -1,8 +1,8 @@
-FROM cypress/included:7.6.0
+FROM node:13.12.0-alpine
 
 WORKDIR /app
 COPY package.json app/package.json
 RUN npm install --silent
 
 COPY . .
-CMD npm run start
+CMD ["npm", "start"]

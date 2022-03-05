@@ -13,11 +13,13 @@ import { ErrorBoundary } from "./components/universal/ErrorBoundary"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { createMuiTheme, ThemeProvider } from "@material-ui/core"
 
-const DEV_API = "http://localhost:8008/graphql"
-const STAGING_API = "https://poemist-django.herokuapp.com/graphql"
+const DEV_API = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8008/"
+const STAGING_API = "https://poemist-django.herokuapp.com/"
 
 const httpLink = createHttpLink({
-  uri: process.env.NODE_ENV === "development" ? DEV_API : STAGING_API,
+  uri:
+    (process.env.NODE_ENV === "development" ? DEV_API : STAGING_API) +
+    "graphql",
 })
 
 const authLink = setContext((_, { headers }) => {
