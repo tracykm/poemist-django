@@ -26,7 +26,7 @@ jobs:
         run: make format
 
       - name: Wait
-        run: sleep 100
+        run: sleep 200
 
       - name: Cypress tests
         run: docker-compose run --rm cypress npx cypress run
