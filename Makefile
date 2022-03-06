@@ -17,5 +17,5 @@ check_migrations:
 	docker-compose run --rm api python manage.py makemigrations --check --dry-run
 
 cypress:
-	docker-compose run --rm cypress npx cypress run
+	docker-compose run --rm cypress npx wait-on http://frontend:3000 && npm run cypress:run
 	
