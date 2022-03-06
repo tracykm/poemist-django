@@ -29,4 +29,4 @@ jobs:
         run: sleep 200
 
       - name: Cypress tests
-        run: docker-compose run --rm cypress npx cypress run
+        run: docker-compose run cypress
