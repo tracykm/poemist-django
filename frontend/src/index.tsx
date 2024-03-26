@@ -5,9 +5,12 @@ import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 import { HashRouter as Router } from "react-router-dom"
 
+import { createClient, fetchExchange, Provider } from "urql"
+import { cacheExchange } from "@urql/exchange-graphcache"
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 import { ApolloProvider } from "@apollo/client"
+
 import { ErrorBoundary } from "./components/universal/ErrorBoundary"
 
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -32,9 +35,34 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const client = new ApolloClient({
+const apolloClient = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache({}),
+})
+
+const client = createClient({
+  url: process.env.NODE_ENV === "development" ? DEV_API : STAGING_API,
+  exchanges: [
+    cacheExchange({
+      updates: {
+        Mutation: {
+          deletePoem(_result, args, cache, _info) {
+            cache.invalidate({
+              __typename: "PoemType",
+              id: args.id as number,
+            })
+          },
+        },
+      },
+    }),
+    fetchExchange,
+  ],
+  fetchOptions: () => {
+    const token = localStorage.getItem("token")
+    return {
+      headers: { Authorization: token ? `JWT ${token}` : "" },
+    }
+  },
 })
 
 const theme = createMuiTheme({
@@ -61,14 +89,16 @@ const theme = createMuiTheme({
 ReactDOM.render(
   <StrictMode>
     <ErrorBoundary>
-      <ApolloProvider client={client}>
-        <Router>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <App />
-          </ThemeProvider>
-        </Router>
-      </ApolloProvider>
+      <Provider value={client}>
+        <ApolloProvider client={apolloClient}>
+          <Router>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <App />
+            </ThemeProvider>
+          </Router>
+        </ApolloProvider>
+      </Provider>
     </ErrorBoundary>
   </StrictMode>,
   document.getElementById("root"),
